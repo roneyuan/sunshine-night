@@ -247,8 +247,23 @@ function getNewsDataFromApi(searchTerm, callback) {
 }
 
 function getGlassdoorDataFromApi(searchTerm, callback) {
+// Example
+var GLASSDOOR_URL = 'http://api.glassdoor.com/api/api.htm';
 
+  var query = {
+    v: 1,
+    format: 'json',
+    't.p':"119004",
+    't.k': "gHME7vA2tRw",
+    userip:"0.0.0.0",
+    useragent:"Mozilla",
+    callback:displayGlassdoorData,
+    action: "employers",
+    q: "IBM"
+  }
+  $.getJSON(GLASSDOOR_URL, query, callback);
 }
+
 
 function displayStockData(data) {
 
@@ -259,7 +274,7 @@ function displayNewsData(data) {
 }
 
 function displayGlassdoorData(data) {
-
+console.log(data);
 }
 
 function changeRangeOfChart(range) {
@@ -272,7 +287,7 @@ $(".stock1").on('click', function(event) {
 
 	var search = $('#one').val();
 	getStockDataFromApi(search, displayStockData)
-    marketDataExample2();
+    //marketDataExample2();
 	getNewsDataFromApi(search, displayNewsData)	
 	getGlassdoorDataFromApi(search, displayGlassdoorData)	
 })
