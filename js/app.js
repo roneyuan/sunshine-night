@@ -13,7 +13,7 @@ var Markit = {};
 Markit.QuoteService = function(sSymbol, fCallback) {
     this.symbol = sSymbol;
     this.fCallback = fCallback;
-    this.DATA_SRC = "http://dev.markitondemand.com/Api/v2/Quote/jsonp";
+    this.DATA_SRC = "https://dev.markitondemand.com/Api/v2/Quote/jsonp";
     this.makeRequest();
 };
 /**
