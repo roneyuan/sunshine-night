@@ -57,7 +57,7 @@ new Markit.QuoteService("AAPL", function(jsonResult) {
     console.log(jsonResult);
 
     //Now proceed to do something with the data.
-    $(".stock").first().text(jsonResult);
+    $(".stock").first().text(jsonResult.Name);
 
     /**
     * Need help? Visit the API documentation at:
@@ -68,6 +68,9 @@ new Markit.QuoteService("AAPL", function(jsonResult) {
 }
 
 function marketDataExample2() {
+/** 
+ * Version 2.0
+ */
 var Markit = {};
 /**
  * Define the InteractiveChartApi.
@@ -92,7 +95,7 @@ Markit.InteractiveChartApi.prototype.PlotChart = function(){
             $("#chartDemoContainer").text("Loading chart...");
         },
         data: params,
-        url: "https://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp",
+        url: "http://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp",
         dataType: "jsonp",
         context: this,
         success: function(json){
@@ -192,7 +195,7 @@ Markit.InteractiveChartApi.prototype.render = function(data) {
     ]];
 
     // create the chart
-    $('#chartDemoContainer').highcharts('StockChart', {
+    $('.chartDemoContainer').highcharts('StockChart', {
         
         rangeSelector: {
             selected: 1
@@ -239,11 +242,22 @@ Markit.InteractiveChartApi.prototype.render = function(data) {
             enabled:false
         }
     });
-};    
+}; 
+
+
+ new Markit.InteractiveChartApi("AAPL", 3650);
+
 }
 
 function getNewsDataFromApi(searchTerm, callback) {
+    var URL = "https://api.nytimes.com/svc/topstories/v2/home.json";
 
+  var query = {
+    section: "business",
+    format: "jsonp",
+    callback: displayNewsData
+  }
+  $.getJSON(URL, query, callback);  
 }
 
 function getGlassdoorDataFromApi(searchTerm, callback) {
@@ -270,7 +284,7 @@ function displayStockData(data) {
 }
 
 function displayNewsData(data) {
-
+console.log(data);
 }
 
 function displayGlassdoorData(data) {
@@ -286,10 +300,10 @@ $(".stock1").on('click', function(event) {
 	event.preventDefault();
 
 	var search = $('#one').val();
-	getStockDataFromApi(search, displayStockData)
-    //marketDataExample2();
-	getNewsDataFromApi(search, displayNewsData)	
-	getGlassdoorDataFromApi(search, displayGlassdoorData)	
+	//getStockDataFromApi(search, displayStockData)
+    marketDataExample2();
+	//getNewsDataFromApi(search, displayNewsData)	
+	//getGlassdoorDataFromApi(search, displayGlassdoorData)	
 })
 
 $(".stock2").on('click', function(event) {
