@@ -92,7 +92,7 @@ Markit.InteractiveChartApi.prototype.PlotChart = function(){
             $("#chartDemoContainer").text("Loading chart...");
         },
         data: params,
-        url: "http://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp",
+        url: "https://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp",
         dataType: "jsonp",
         context: this,
         success: function(json){
@@ -248,7 +248,7 @@ function getNewsDataFromApi(searchTerm, callback) {
 
 function getGlassdoorDataFromApi(searchTerm, callback) {
 // Example
-var GLASSDOOR_URL = 'http://api.glassdoor.com/api/api.htm';
+var GLASSDOOR_URL = 'https://api.glassdoor.com/api/api.htm';
 
   var query = {
     v: 1,
