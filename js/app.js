@@ -1,72 +1,3 @@
-function getStockDataFromApi(searchTerm, callback) {
-
-
-// Example
-
-
-var Markit = {};
-/**
-* Define the QuoteService.
-* First argument is symbol (string) for the quote. Examples: AAPL, MSFT, JNJ, GOOG.
-* Second argument is fCallback, a callback function executed onSuccess of API.
-*/
-Markit.QuoteService = function(sSymbol, fCallback) {
-    this.symbol = sSymbol;
-    this.fCallback = fCallback;
-    this.DATA_SRC = "http://dev.markitondemand.com/Api/v2/Quote/jsonp";
-    this.makeRequest();
-};
-/**
-* Ajax success callback. fCallback is the 2nd argument in the QuoteService constructor.
-*/
-Markit.QuoteService.prototype.handleSuccess = function(jsonResult) {
-    this.fCallback(jsonResult);
-};
-/**
-* Ajax error callback
-*/
-Markit.QuoteService.prototype.handleError = function(jsonResult) {
-    console.error(jsonResult);
-};
-/** 
-* Starts a new ajax request to the Quote API
-*/
-Markit.QuoteService.prototype.makeRequest = function() {
-    //Abort any open requests
-    if (this.xhr) { this.xhr.abort(); }
-    //Start a new request
-    this.xhr = $.ajax({
-        data: { symbol: this.symbol },
-        url: this.DATA_SRC,
-        dataType: "jsonp",
-        success: this.handleSuccess,
-        error: this.handleError,
-        context: this
-    });
-};
-
-new Markit.QuoteService("AAPL", function(jsonResult) {
-
-    //Catch errors
-    if (!jsonResult || jsonResult.Message){
-        console.error("Error: ", jsonResult.Message);
-        return;
-    }
-
-    //If all goes well, your quote will be here.
-    console.log(jsonResult);
-
-    //Now proceed to do something with the data.
-    $(".stock").first().text(jsonResult.Name);
-
-    /**
-    * Need help? Visit the API documentation at:
-    * http://dev.markitondemand.com
-    */
-});	
-
-}
-
 function marketDataExample2() {
 /** 
  * Version 2.0
@@ -284,12 +215,56 @@ var callGuardianApi = function() {
 
 }
 
-var displayStockData = function(data) {
-    console.log(data);
-    // Store Data to the state
+var displayStockData1 = function(data) {
+    var res = 0;
     
+    stockQuote[res].Change = data.Change,
+    stockQuote[res].ChangePercent = data.ChangePercent,
+    stockQuote[res].ChangePercentYTD = data.ChangePercentYTD,
+    stockQuote[res].ChangeYTD = data.ChangeYTD,
+    stockQuote[res].High = data.High,
+    stockQuote[res].LastPrice = data.LastPrice,
+    stockQuote[res].Low = data.Low,
+    stockQuote[res].MSDate = data.MSDate,
+    stockQuote[res].MarketCap = data.MarketCap,
+    stockQuote[res].Name = data.Name,
+    stockQuote[res].Open = data.Open,
+    stockQuote[res].Status = data.Status,
+    stockQuote[res].Symbol = data.Symbol,
+    stockQuote[res].Timestamp = data.Timestamp,
+    stockQuote[res].Volume = data.Volume
+
+    //console.log(stockQuote[0]);
+
+    for (key in stockQuote[res]) {
+        $('#stock1').append(`<div class="col-3">${stockQuote[res][key]}</div>`);
+    }
 }
 
+var displayStockData2 = function(data) {
+    var res = 1;
+    
+    stockQuote[res].Change = data.Change,
+    stockQuote[res].ChangePercent = data.ChangePercent,
+    stockQuote[res].ChangePercentYTD = data.ChangePercentYTD,
+    stockQuote[res].ChangeYTD = data.ChangeYTD,
+    stockQuote[res].High = data.High,
+    stockQuote[res].LastPrice = data.LastPrice,
+    stockQuote[res].Low = data.Low,
+    stockQuote[res].MSDate = data.MSDate,
+    stockQuote[res].MarketCap = data.MarketCap,
+    stockQuote[res].Name = data.Name,
+    stockQuote[res].Open = data.Open,
+    stockQuote[res].Status = data.Status,
+    stockQuote[res].Symbol = data.Symbol,
+    stockQuote[res].Timestamp = data.Timestamp,
+    stockQuote[res].Volume = data.Volume
+
+    //console.log(stockQuote[1]);
+    for (key in stockQuote[res]) {
+        $('#stock2').append(`<div class="col-3">${stockQuote[res][key]}</div>`);
+    }
+}
 var displayNewsData = function(data) {
 
 }
@@ -303,7 +278,7 @@ $(".stock1").on('click', function(event) {
     event.preventDefault();
 
     var search1 = $('#firstSearch').val();
-    callMarkitOnDemandApi(search1, displayStockData);
+    callMarkitOnDemandApi(search1, displayStockData1);
     //marketDataExample2();
     //getNewsDataFromApi(search, displayNewsData)   
 })
@@ -311,8 +286,8 @@ $(".stock1").on('click', function(event) {
 $(".stock2").on('click', function(event) {
     event.preventDefault();
 
-    var search = $('#secondSearch').val();
-    getStockDataFromApi(secondSearch, displayStockData) 
+    var search2 = $('#secondSearch').val();
+    callMarkitOnDemandApi(search2, displayStockData2) 
 })
 
 
