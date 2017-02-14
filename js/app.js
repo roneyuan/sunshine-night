@@ -260,59 +260,61 @@ function getNewsDataFromApi(searchTerm, callback) {
   $.getJSON(URL, query, callback);  
 }
 
-function getGlassdoorDataFromApi(searchTerm, callback) {
-// Example
-var GLASSDOOR_URL = 'https://api.glassdoor.com/api/api.htm';
 
-  var query = {
-    v: 1,
-    format: 'json',
-    't.p':"119004",
-    't.k': "gHME7vA2tRw",
-    userip:"0.0.0.0",
-    useragent:"Mozilla",
-    callback:displayGlassdoorData,
-    action: "employers",
-    q: "IBM"
-  }
-  $.getJSON(GLASSDOOR_URL, query, callback);
+
+
+var callMarkitOnDemandApi = function(searchTerm, callback) {
+    var MARKITONDEMAND_URL = "http://dev.markitondemand.com/Api/v2/Quote/jsonp"; // Has to be jsonp in order to display data
+
+    // Does not work using $.getJSON. It needs to use $.ajax
+    $.ajax({
+        data: { symbol: searchTerm },
+        url: MARKITONDEMAND_URL,
+        dataType: "jsonp",
+        success: callback,
+        error: callback
+    });
 }
 
-
-function displayStockData(data) {
+var callNewYorkTimesApi = function() {
 
 }
 
-function displayNewsData(data) {
-console.log(data);
+var callGuardianApi = function() {
+
 }
 
-function displayGlassdoorData(data) {
-console.log(data);
+var displayStockData = function(data) {
+    console.log(data);
+    // Store Data to the state
+    
 }
 
-function changeRangeOfChart(range) {
-	// fetch data from index.js
+var displayNewsData = function(data) {
+
+}
+
+var displayGuardianData = function(data) {
+
 }
 
 // Button one click
 $(".stock1").on('click', function(event) {
-	event.preventDefault();
+    event.preventDefault();
 
-	var search = $('#one').val();
-	//getStockDataFromApi(search, displayStockData)
-    marketDataExample2();
-	//getNewsDataFromApi(search, displayNewsData)	
-	//getGlassdoorDataFromApi(search, displayGlassdoorData)	
+    var search1 = $('#firstSearch').val();
+    callMarkitOnDemandApi(search1, displayStockData);
+    //marketDataExample2();
+    //getNewsDataFromApi(search, displayNewsData)   
 })
 
 $(".stock2").on('click', function(event) {
-	event.preventDefault();
+    event.preventDefault();
 
-	var search = $('#two').val();
-	getStockDataFromApi(search, displayStockData)
-	getNewsDataFromApi(search, displayNewsData)	
-	getGlassdoorDataFromApi(search, displayGlassdoorData)	
+    var search = $('#secondSearch').val();
+    getStockDataFromApi(secondSearch, displayStockData) 
 })
 
-// time range listener here...
+
+
+
