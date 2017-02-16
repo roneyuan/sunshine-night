@@ -207,10 +207,66 @@ var callMarkitOnDemandApi = function(searchTerm, callback) {
     });
 }
 
-var callNewYorkTimesApi = function() {
 
+var callMarkitOnDemandChartApi = function(searchTerm, callback) {
+    var MARKITONDEMAND_CHART_URL = "http://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp";
+    var params = {
+        parameters: JSON.stringify(            
+        { Normalized: false,
+            NumberOfDays: 180,
+            DataPeriod: "Day",
+            Elements: [
+                {
+                    Symbol: "IBM",
+                    Type: "price",
+                    Params: ["ohlc"] //ohlc, c = close only
+                },
+                {
+                    Symbol: "IBM",
+                    Type: "volume"
+                }
+            ]} )
+    }
+
+    $.ajax({
+        data: params,
+        url: MARKITONDEMAND_CHART_URL,
+        dataType: "jsonp",
+        context: this,
+        success: function(json){
+            //Catch errors
+            if (!json || json.Message){
+                console.error("Error: ", json.Message);
+                return;
+            }
+            disaplyChart(json);
+        },
+        error: function(response,txtStatus){
+            console.log(response,txtStatus)
+        }
+
+
+    });
 }
 
+var callNewYorkTimesApi = function(searTerm, callback) {
+    var url = "https://api.nytimes.com/svc/topstories/v2/business.json";
+    url += '?' + $.param({
+        'api-key': "01c5c546907941af9428ba53d9625c9b",
+    }); 
+    $.ajax({
+        url: url,
+        method: 'GET'
+    }).done(function(result) {
+        callback(result)
+    }).fail(function(err) {
+       throw err;
+    });
+}
+
+function businessTopStoriesCallback(data) {
+    console.log(data)
+}
 var callGuardianApi = function() {
 
 }
@@ -265,12 +321,42 @@ var displayStockData2 = function(data) {
         $('#stock2').append(`<div class="col-3">${stockQuote[res][key]}</div>`);
     }
 }
+
+
+function disaplyChart(data) {
+    console.log(data);
+}
+
 var displayNewsData = function(data) {
+    //var res = data.responseText;
+    console.log(data.results[1]);
 
 }
 
 var displayGuardianData = function(data) {
 
+}
+
+
+var callGlassdoorApi = function(searchTerm, callback) {
+    var GLASSDOOR_URL = 'https://api.glassdoor.com/api/api.htm';
+
+    var query = {
+        v: 1,
+        format: 'json',
+        't.p':"119004",
+        't.k': "gHME7vA2tRw",
+        userip:"0.0.0.0",
+        useragent:"Mozilla",
+        callback:displayGlassdoorData,
+        action: "employers",
+        q: searchTerm
+    }
+    $.getJSON(GLASSDOOR_URL, query, callback);
+}
+
+function displayGlassdoorData(data) {
+    console.log(data);
 }
 
 // Button one click
@@ -280,7 +366,9 @@ $(".stock1").on('click', function(event) {
     var search1 = $('#firstSearch').val();
     callMarkitOnDemandApi(search1, displayStockData1);
     //marketDataExample2();
-    //getNewsDataFromApi(search, displayNewsData)   
+    callNewYorkTimesApi(search1, displayNewsData);
+    callMarkitOnDemandChartApi(search1, disaplyChart);
+    //callGlassdoorApi(search1, displayGlassdoorData);   
 })
 
 $(".stock2").on('click', function(event) {
