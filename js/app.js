@@ -180,15 +180,71 @@ Markit.InteractiveChartApi.prototype.render = function(data) {
 
 }
 
+
+var seriesOptions = [],
+    seriesCounter = 0,
+    names = ['MSFT', 'AAPL'];
+
+/**
+ * Create the chart when all data is loaded
+ * @returns {undefined}
+ */
+function createChart(data) {
+    console.log(data);
+    Highcharts.stockChart('chartDemoContainer', {
+
+        rangeSelector: {
+            selected: 3 // Select default range like 3m 6m or 12m
+        },
+
+        yAxis: {
+
+            // Setup labels on the right
+            labels: {
+                formatter: function () {
+                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
+                }
+            },
+
+            // Setup 0 point line
+            plotLines: [{
+                value: 0,
+                width: 2,
+                color: 'silver'
+            }]
+        },
+
+        plotOptions: {
+            series: {
+                compare: 'percent',
+                showInNavigator: true // Show graph on the bottom
+            }
+        },
+
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+            valueDecimals: 2, // decimal point
+            split: true
+        },
+
+        series: { name: ["AAPL"],
+                  data: data } // This is where the data store
+    });
+}
+
+
+
+
+
 function getNewsDataFromApi(searchTerm, callback) {
     var URL = "https://api.nytimes.com/svc/topstories/v2/home.json";
 
-  var query = {
-    section: "business",
-    format: "jsonp",
-    callback: displayNewsData
-  }
-  $.getJSON(URL, query, callback);  
+    var query = {
+        section: "business",
+        format: "jsonp",
+        callback: displayNewsData
+    }
+    $.getJSON(URL, query, callback);  
 }
 
 
@@ -325,6 +381,11 @@ var displayStockData2 = function(data) {
 
 function disaplyChart(data) {
     console.log(data);
+
+    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?',    function (data2) {
+        createChart(data2);
+    });
+
 }
 
 var displayNewsData = function(data) {
