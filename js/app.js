@@ -40,7 +40,7 @@ function createChart(data) {
             split: true
         },
 
-        series: [data] // This is where the data store
+        series: data // This is where the data store
     });
 }
 
@@ -79,21 +79,18 @@ var callMarkitOnDemandApi = function(searchTerm, callback) {
 var callMarkitOnDemandChartApi = function(searchTerm, callback) {
     var MARKITONDEMAND_CHART_URL = "http://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp";
     var params = {
-        parameters: JSON.stringify(            
-        { Normalized: false,
-            NumberOfDays: 180,
+        parameters: JSON.stringify({   
+            Normalized: false,
+            NumberOfDays: 3650,
             DataPeriod: "Day",
             Elements: [
                 {
-                    Symbol: "IBM",
+                    Symbol: "AAPL",
                     Type: "price",
                     Params: ["ohlc"] //ohlc, c = close only
-                },
-                {
-                    Symbol: "IBM",
-                    Type: "volume"
                 }
-            ]} )
+            ]
+        })
     }
 
     $.ajax({
@@ -101,7 +98,7 @@ var callMarkitOnDemandChartApi = function(searchTerm, callback) {
         url: MARKITONDEMAND_CHART_URL,
         dataType: "jsonp",
         context: this,
-        success: function(json){
+        success: function(json) {
             //Catch errors
             if (!json || json.Message){
                 console.error("Error: ", json.Message);
@@ -124,7 +121,7 @@ var callNewYorkTimesApi = function(searTerm, callback) {
     }); 
     $.ajax({
         url: url,
-        method: 'GET'
+        method: 'GET' // jQuery Promise - done = then, fail = catch
     }).done(function(result) {
         callback(result)
     }).fail(function(err) {
@@ -188,19 +185,104 @@ var displayStockData2 = function(data) {
     for (key in stockQuote[res]) {
         $('#stock2').append(`<div class="col-3">${stockQuote[res][key]}</div>`);
     }
+
+    // Single reponsobility principle
+    // Idea: function, class, object...encapsulate should have only one responsibilty or reason to change.
+    // Second argument on the function - pass the string - will be the element you want. 
+
+    // Capabiliy Secuity - no classs or object...
 }
 
 
 function disaplyChart(data) {
-    //console.log(data);
+    console.log(data);
 
-    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?',    function (data2) {
-        var seriesOptions = {
-            name: "AAPL",
-            data: data2
-        };
-        createChart(seriesOptions);
-    });
+/*TODO Optimize performance later*/
+// var dataArray = [];
+// var tempArray = [];
+
+// for (var i = 0; i < data.Elements[0].DataSeries.close.values.length; i++) {
+//     tempArray = [];
+//     for (var j=0; j<=3; i++) {
+//         tempArray.push(data.Positions[i]);
+//         tempArray.push(data.Elements[0].DataSeries.open.values[i]);
+//         tempArray.push(data.Elements[0].DataSeries.high.values[i]);
+//         tempArray.push(data.Elements[0].DataSeries.low.values[i]);
+//         tempArray.push(data.Elements[0].DataSeries.close.values[i]);
+//     }
+//     dataArray.push(tempArray);
+// }
+
+//console.log(dataArray);
+// data format is [[x, open, high, low, close],.....]
+
+
+// data :[timestamp, open...]
+    var seriesOptions = [
+    { // Sample
+        name: "AAPL",
+        data: 
+        [[1266796800000,28.63],
+        [1266883200000,28.15],
+        [1266969600000,28.66],
+        [1267056000000,28.86],
+        [1267142400000,29.23],
+        [1267401600000,29.86],
+        [1267488000000,29.84],
+        [1267574400000,29.90],
+        [1267660800000,30.10],
+        [1267747200000,31.28],
+        [1268006400000,31.30],
+        [1268092800000,31.86],
+        [1268179200000,32.12],
+        [1268265600000,32.21],
+        [1268352000000,32.37],
+        [1268611200000,31.98],
+        [1268697600000,32.06],
+        [1268784000000,32.02],
+        [1268870400000,32.09],
+        [1268956800000,31.75],
+        [1269216000000,32.11],
+        [1269302400000,32.62],
+        [1269388800000,32.77],
+        [1269475200000,32.38],
+        [1269561600000,32.99],
+        [1269820800000,33.20],
+        [1269907200000,33.69],
+        [1269993600000,33.57]]
+    },
+    {
+        name: "IBM",
+        data: 
+        [[1266796800000,128.63],
+        [1266883200000,128.15],
+        [1266969600000,128.66],
+        [1267056000000,128.86],
+        [1267142400000,129.23],
+        [1267401600000,129.86],
+        [1267488000000,129.84],
+        [1267574400000,129.90],
+        [1267660800000,130.10],
+        [1267747200000,131.28],
+        [1268006400000,131.30],
+        [1268092800000,131.86],
+        [1268179200000,132.12],
+        [1268265600000,132.21],
+        [1268352000000,132.37],
+        [1268611200000,131.98],
+        [1268697600000,132.06],
+        [1268784000000,132.02],
+        [1268870400000,132.09]]     
+    }];
+    createChart(seriesOptions);
+
+    // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?',    function (data2) {
+    //     var seriesOptions = {
+    //         name: searchTerm,
+    //         data: data2
+    //     };
+    //     createChart(seriesOptions);
+    // });
 
 }
 
@@ -254,6 +336,17 @@ $(".stock2").on('click', function(event) {
     var search2 = $('#secondSearch').val();
     callMarkitOnDemandApi(search2, displayStockData2) 
 })
+
+
+// Use map or foreach function to replace for loop
+// Avoid using for loop
+// for loop might freeze up...
+
+// When we get question about challenges
+// Trying to figure to good story to tell people. Every day story happened
+// Interesting problems you solved. When something happen, interesting way to solve
+
+// Recorder interesting problems you solved
 
 
 
