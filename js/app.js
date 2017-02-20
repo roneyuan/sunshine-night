@@ -113,19 +113,36 @@ var callMarkitOnDemandChartApi = function(searchTerm, callback) {
     });
 }
 
-var callNewYorkTimesApi = function(searTerm, callback) {
-    var url = "https://api.nytimes.com/svc/topstories/v2/business.json";
+var callNewYorkTimesApi = function(searchTerm, callback) {
+    console.log(searchTerm);
+
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     url += '?' + $.param({
         'api-key': "01c5c546907941af9428ba53d9625c9b",
-    }); 
+        'q': searchTerm,
+        'begin_date': "20161231",
+        'end_date': "20170130"
+    });
     $.ajax({
         url: url,
-        method: 'GET' // jQuery Promise - done = then, fail = catch
+        method: 'GET',
     }).done(function(result) {
-        callback(result)
+        callback(result);
     }).fail(function(err) {
-       throw err;
+        throw err;
     });
+    // var url = "https://api.nytimes.com/svc/topstories/v2/business.json";
+    // url += '?' + $.param({
+    //     'api-key': "01c5c546907941af9428ba53d9625c9b",
+    // }); 
+    // $.ajax({
+    //     url: url,
+    //     method: 'GET' // jQuery Promise - done = then, fail = catch
+    // }).done(function(result) {
+    //     callback(result)
+    // }).fail(function(err) {
+    //    throw err;
+    // });
 }
 
 function businessTopStoriesCallback(data) {
@@ -209,7 +226,7 @@ function disaplyChart(data) {
         dataArray.push(tempArray);
     }
 
-    //console.log(data);
+    console.log(stockQuote);
 
     var chartState = {
         name: "",
@@ -219,28 +236,41 @@ function disaplyChart(data) {
         chartState.name = data.Elements[0].Symbol;
         chartState.data = dataArray;
         seriesChart.push(chartState);
+        callNewYorkTimesApi(stockQuote[1].Name, displayNewsData2);
         createChart(seriesChart);
     } else {
         chartState.name = data.Elements[0].Symbol;
         chartState.data = dataArray;
         seriesChart.push(chartState);
+        callNewYorkTimesApi(stockQuote[0].Name, displayNewsData1);
     }
 }
 
-var displayNewsData = function(data) {
+var displayNewsData1 = function(data) {
     //var res = data.responseText;
-    var newsResult = data.results;
+    console.log(data);
+    var newsResult = data.response.docs;
 
     newsResult.forEach(function(elem) {
-        console.log(elem); 
-        $('#news1').append(`<div class="col-3"><a href="${elem.url}">${elem.title}</a></div>`)           
+        //console.log(elem); 
+        $('#news1').append(`<div class="col-6"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
     });
+
+    return;
     //console.log(data);
-
-
-
 }
+var displayNewsData2 = function(data) {
 
+    var newsResult = data.response.docs;
+
+    newsResult.forEach(function(elem) {
+        //console.log(elem); 
+        $('#news2').append(`<div class="col-6"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
+    });
+
+    return;
+    //console.log(data);
+}
 var displayGuardianData = function(data) {
 
 }
@@ -272,7 +302,7 @@ $(".stock1").on('click', function(event) {
     event.preventDefault();
     var search1 = $('#firstSearch').val();
     callMarkitOnDemandApi(search1, displayStockData1);
-    callNewYorkTimesApi(search1, displayNewsData);
+    //callNewYorkTimesApi(search1, displayNewsData1);
     callMarkitOnDemandChartApi(search1, disaplyChart);
     //callGlassdoorApi(search1, displayGlassdoorData);   
 })
