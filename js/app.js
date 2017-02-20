@@ -3,7 +3,7 @@
  * @returns {undefined}
  */
 function createChart(data) {
-    console.log(data);
+    //console.log(data);
     Highcharts.stockChart('chartDemoContainer', {
 
         rangeSelector: {
@@ -85,7 +85,7 @@ var callMarkitOnDemandChartApi = function(searchTerm, callback) {
             DataPeriod: "Day",
             Elements: [
                 {
-                    Symbol: "AAPL", // searchTerm
+                    Symbol: searchTerm,
                     Type: "price",
                     Params: ["ohlc"] //ohlc, c = close only
                 }
@@ -153,9 +153,12 @@ var displayStockData1 = function(data) {
     stockQuote[res].Timestamp = data.Timestamp,
     stockQuote[res].Volume = data.Volume
 
-    for (key in stockQuote[res]) {
-        $('#stock1').append(`<div class="col-3">${stockQuote[res][key]}</div>`);
-    }
+    $('#symbol1').append(stockQuote[res].Symbol);
+    $('#high1').append(stockQuote[res].High);
+    $('#low1').append(stockQuote[res].Low);
+    $('#volume1').append(stockQuote[res].Volume);
+    $('#marketcap1').append(stockQuote[res].MarketCap);
+    $('#lastprice1').append(stockQuote[res].LastPrice);
 }
 
 var displayStockData2 = function(data) {
@@ -177,10 +180,12 @@ var displayStockData2 = function(data) {
     stockQuote[res].Timestamp = data.Timestamp,
     stockQuote[res].Volume = data.Volume
 
-    //console.log(stockQuote[1]);
-    for (key in stockQuote[res]) {
-        $('#stock2').append(`<div class="col-3">${stockQuote[res][key]}</div>`);
-    }
+    $('#symbol2').append(stockQuote[res].Symbol);
+    $('#high2').append(stockQuote[res].High);
+    $('#low2').append(stockQuote[res].Low);
+    $('#volume2').append(stockQuote[res].Volume);
+    $('#marketcap2').append(stockQuote[res].MarketCap);
+    $('#lastprice2').append(stockQuote[res].LastPrice);
 
     // Single reponsobility principle
     // Idea: function, class, object...encapsulate should have only one responsibilty or reason to change.
@@ -191,50 +196,48 @@ var displayStockData2 = function(data) {
 
 
 function disaplyChart(data) {
+
+    // 2d array where inner array respresent ohlc. That data was scatterd over by object.
+
+    var dataArray = [];
+    var tempArray = [];
+
+    for (var i = 0; i < data.Elements[0].DataSeries.close.values.length; i++) {
+        tempArray = [];
+        tempArray.push(Date.parse(data.Dates[i]));
+        tempArray.push(data.Elements[0].DataSeries.open.values[i]);
+        dataArray.push(tempArray);
+    }
+
     //console.log(data);
 
-/*
-    TODO Optimize performance later. Transform date to timestamp?
-*/
-
-//2d array where inner array respresent ohlc. That data was scatterd over by object.
-
-var dataArray = [];
-var tempArray = [];
-
-for (var i = 0; i < data.Elements[0].DataSeries.close.values.length; i++) {
-    tempArray = [];
-    //for (var j=0; j<=4; j++) {
-    tempArray.push(Date.parse(data.Dates[i]));
-    tempArray.push(data.Elements[0].DataSeries.open.values[i]);
-        //tempArray.push(data.Elements[0].DataSeries.high.values[i]);
-        //tempArray.push(data.Elements[0].DataSeries.low.values[i]);
-        //tempArray.push(data.Elements[0].DataSeries.close.values[i]);
-    //console.log(tempArray);
-    //}
-    dataArray.push(tempArray);
-    //dataArry[i][0]
-}
-
-console.log(dataArray);
-// data format is [[x, open, high, low, close],.....]
-// data :[timestamp, open...]
-
-    var openPrice = data.Elements[0].DataSeries.open.values;
-    var timeRange = data.Dates.forEach((elem) => {  Date.parse(elem);});// one line only return something...no ambiguility
-    //console.log(openPrice);
-    //console.log(data.Dates);
-    var seriesOptions = [
-    { // Sample
-        name: "AAPL",
-        data: dataArray
-    }];
-    createChart(seriesOptions);
+    var chartState = {
+        name: "",
+        data: null
+    }
+    if (seriesChart.length !== 0) {
+        chartState.name = data.Elements[0].Symbol;
+        chartState.data = dataArray;
+        seriesChart.push(chartState);
+        createChart(seriesChart);
+    } else {
+        chartState.name = data.Elements[0].Symbol;
+        chartState.data = dataArray;
+        seriesChart.push(chartState);
+    }
 }
 
 var displayNewsData = function(data) {
     //var res = data.responseText;
-    console.log(data.results[1]);
+    var newsResult = data.results;
+
+    newsResult.forEach(function(elem) {
+        console.log(elem); 
+        $('#news1').append(`<div class="col-3"><a href="${elem.url}">${elem.title}</a></div>`)           
+    });
+    //console.log(data);
+
+
 
 }
 
@@ -278,7 +281,8 @@ $(".stock2").on('click', function(event) {
     event.preventDefault();
 
     var search2 = $('#secondSearch').val();
-    callMarkitOnDemandApi(search2, displayStockData2) 
+    callMarkitOnDemandApi(search2, displayStockData2); 
+    callMarkitOnDemandChartApi(search2, disaplyChart);
 })
 
 

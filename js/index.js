@@ -6,6 +6,10 @@ var state = {
 	fiveYear: {}
 }
 
+var seriesChart = [];
+
+
+
 var stockQuote = [
 	{
 		Change: 0,
