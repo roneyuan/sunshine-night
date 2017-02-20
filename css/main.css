@@ -8,3 +8,19 @@ ul {
 li {
 	display: inline-block;
 }
+
+td {
+	width:20%;
+
+}
+
+tr {
+	height:30px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.news {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}

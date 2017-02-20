@@ -131,18 +131,6 @@ var callNewYorkTimesApi = function(searchTerm, callback) {
     }).fail(function(err) {
         throw err;
     });
-    // var url = "https://api.nytimes.com/svc/topstories/v2/business.json";
-    // url += '?' + $.param({
-    //     'api-key': "01c5c546907941af9428ba53d9625c9b",
-    // }); 
-    // $.ajax({
-    //     url: url,
-    //     method: 'GET' // jQuery Promise - done = then, fail = catch
-    // }).done(function(result) {
-    //     callback(result)
-    // }).fail(function(err) {
-    //    throw err;
-    // });
 }
 
 function businessTopStoriesCallback(data) {
@@ -253,7 +241,7 @@ var displayNewsData1 = function(data) {
 
     newsResult.forEach(function(elem) {
         //console.log(elem); 
-        $('#news1').append(`<div class="col-6"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
+        $('#news1').append(`<div class="col-6 news"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
     });
 
     return;
@@ -265,7 +253,7 @@ var displayNewsData2 = function(data) {
 
     newsResult.forEach(function(elem) {
         //console.log(elem); 
-        $('#news2').append(`<div class="col-6"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
+        $('#news2').append(`<div class="col-6 news"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
     });
 
     return;
