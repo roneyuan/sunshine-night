@@ -303,6 +303,12 @@ $(".stock2").on('click', function(event) {
     callMarkitOnDemandChartApi(search2, disaplyChart);
 })
 
+// Create initial state 
+// difference between IIFE?
+$(function() {
+    createChart([0]);
+})
+
 
 // Use map or foreach function to replace for loop
 // Avoid using for loop

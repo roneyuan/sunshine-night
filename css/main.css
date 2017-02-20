@@ -21,6 +21,7 @@ tr {
 }
 
 .news {
-	padding-top: 12px;
-	padding-bottom: 12px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	height: 200px;
 }
