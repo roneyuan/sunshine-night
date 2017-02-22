@@ -1,66 +1,24 @@
-/**
- * Create the chart when all data is loaded
- * @returns {undefined}
- */
-function createChart(data) {
-    //console.log(data);
-    Highcharts.stockChart('chartDemoContainer', {
 
-        rangeSelector: {
-            selected: 3 // Select default range like 3m 6m or 12m
-        },
-
-        yAxis: {
-
-            // Setup labels on the right
-            labels: {
-                formatter: function () {
-                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
-                }
-            },
-
-            // Setup 0 point line
-            plotLines: [{
-                value: 0,
-                width: 2,
-                color: 'silver'
-            }]
-        },
-
-        plotOptions: {
-            series: {
-                compare: 'percent',
-                showInNavigator: true // Show graph on the bottom
-            }
-        },
-
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-            valueDecimals: 2, // decimal point
-            split: true
-        },
-
-        series: data // This is where the data store
-    });
-}
-
-
-
-
-
-function getNewsDataFromApi(searchTerm, callback) {
-    var URL = "https://api.nytimes.com/svc/topstories/v2/home.json";
+var callGlassdoorApi = function(searchTerm, callback) {
+    var GLASSDOOR_URL = 'https://api.glassdoor.com/api/api.htm';
 
     var query = {
-        section: "business",
-        format: "jsonp",
-        callback: displayNewsData
+        v: 1,
+        format: 'json',
+        't.p':"119004",
+        't.k': "gHME7vA2tRw",
+        userip:"0.0.0.0",
+        useragent:"Mozilla",
+        callback:displayGlassdoorData,
+        action: "employers",
+        q: searchTerm
     }
-    $.getJSON(URL, query, callback);  
+    $.getJSON(GLASSDOOR_URL, query, callback);
 }
 
-
-
+function displayGlassdoorData(data) {
+    console.log(data);
+}
 
 var callMarkitOnDemandApi = function(searchTerm, callback) {
     var MARKITONDEMAND_URL = "http://dev.markitondemand.com/Api/v2/Quote/jsonp"; // Has to be jsonp in order to display data
@@ -75,6 +33,41 @@ var callMarkitOnDemandApi = function(searchTerm, callback) {
     });
 }
 
+var displayStockData = function(data) {
+    var stockData = {
+        Change: data.Change,
+        ChangePercent: data.ChangePercent,
+        ChangePercentYTD: data.ChangePercentYTD,
+        ChangeYTD: data.ChangeYTD,
+        High: data.High,
+        LastPrice: data.LastPrice,
+        Low: data.Low,
+        MSDate: data.MSDate,
+        MarketCap: data.MarketCap,
+        Name: data.Name,
+        Open: data.Open,
+        Status: data.Status,
+        Symbol: data.Symbol,
+        Timestamp: data.Timestamp,
+        Volume: data.Volume
+    }   
+
+    stockQuote.push(stockData);
+    
+    $('.companyData').remove();
+    // Use foreach loop to create DOM
+    stockQuote.forEach(function(element) {
+        $('.stock_list').append(`<tr class="companyData"><td>${element.Symbol}</td>
+                                    <td>${element.High}</td>
+                                    <td>${element.Low}</td>
+                                    <td>${element.Volume}</td>
+                                    <td>${element.MarketCap}</td>
+                                    <td>${element.LastPrice}</td>
+                                    <td>${element.Name}</td></tr>`);
+    });
+
+    callNewYorkTimesApi(stockData.Name, displayStockNews);
+}
 
 var callMarkitOnDemandChartApi = function(searchTerm, callback) {
     var MARKITONDEMAND_CHART_URL = "http://dev.markitondemand.com/Api/v2/InteractiveChart/jsonp";
@@ -103,107 +96,16 @@ var callMarkitOnDemandChartApi = function(searchTerm, callback) {
                 console.error("Error: ", json.Message);
                 return;
             }
-            disaplyChart(json);
+            createChart(json);
         },
         error: function(response,txtStatus){
             console.log(response,txtStatus)
         }
-
-
     });
 }
 
-var callNewYorkTimesApi = function(searchTerm, callback) {
-    console.log(searchTerm);
-
-    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-    url += '?' + $.param({
-        'api-key': "01c5c546907941af9428ba53d9625c9b",
-        'q': searchTerm,
-        'begin_date': "20161231",
-        'end_date': "20170130"
-    });
-    $.ajax({
-        url: url,
-        method: 'GET',
-    }).done(function(result) {
-        callback(result);
-    }).fail(function(err) {
-        throw err;
-    });
-}
-
-function businessTopStoriesCallback(data) {
-    console.log(data)
-}
-var callGuardianApi = function() {
-}
-
-var displayStockData1 = function(data) {
-    var res = 0;
-    
-    stockQuote[res].Change = data.Change,
-    stockQuote[res].ChangePercent = data.ChangePercent,
-    stockQuote[res].ChangePercentYTD = data.ChangePercentYTD,
-    stockQuote[res].ChangeYTD = data.ChangeYTD,
-    stockQuote[res].High = data.High,
-    stockQuote[res].LastPrice = data.LastPrice,
-    stockQuote[res].Low = data.Low,
-    stockQuote[res].MSDate = data.MSDate,
-    stockQuote[res].MarketCap = data.MarketCap,
-    stockQuote[res].Name = data.Name,
-    stockQuote[res].Open = data.Open,
-    stockQuote[res].Status = data.Status,
-    stockQuote[res].Symbol = data.Symbol,
-    stockQuote[res].Timestamp = data.Timestamp,
-    stockQuote[res].Volume = data.Volume
-
-    $('#symbol1').append(stockQuote[res].Symbol);
-    $('#high1').append(stockQuote[res].High);
-    $('#low1').append(stockQuote[res].Low);
-    $('#volume1').append(stockQuote[res].Volume);
-    $('#marketcap1').append(stockQuote[res].MarketCap);
-    $('#lastprice1').append(stockQuote[res].LastPrice);
-}
-
-var displayStockData2 = function(data) {
-    var res = 1;
-    
-    stockQuote[res].Change = data.Change,
-    stockQuote[res].ChangePercent = data.ChangePercent,
-    stockQuote[res].ChangePercentYTD = data.ChangePercentYTD,
-    stockQuote[res].ChangeYTD = data.ChangeYTD,
-    stockQuote[res].High = data.High,
-    stockQuote[res].LastPrice = data.LastPrice,
-    stockQuote[res].Low = data.Low,
-    stockQuote[res].MSDate = data.MSDate,
-    stockQuote[res].MarketCap = data.MarketCap,
-    stockQuote[res].Name = data.Name,
-    stockQuote[res].Open = data.Open,
-    stockQuote[res].Status = data.Status,
-    stockQuote[res].Symbol = data.Symbol,
-    stockQuote[res].Timestamp = data.Timestamp,
-    stockQuote[res].Volume = data.Volume
-
-    $('#symbol2').append(stockQuote[res].Symbol);
-    $('#high2').append(stockQuote[res].High);
-    $('#low2').append(stockQuote[res].Low);
-    $('#volume2').append(stockQuote[res].Volume);
-    $('#marketcap2').append(stockQuote[res].MarketCap);
-    $('#lastprice2').append(stockQuote[res].LastPrice);
-
-    // Single reponsobility principle
-    // Idea: function, class, object...encapsulate should have only one responsibilty or reason to change.
-    // Second argument on the function - pass the string - will be the element you want. 
-
-    // Capabiliy Secuity - no classs or object...
-}
-
-
-function disaplyChart(data) {
-
+var createChart = function(data) {
     // 2d array where inner array respresent ohlc. That data was scatterd over by object.
-
     var dataArray = [];
     var tempArray = [];
 
@@ -214,99 +116,112 @@ function disaplyChart(data) {
         dataArray.push(tempArray);
     }
 
-    console.log(stockQuote);
+    var tempChart = {
+        name: data.Elements[0].Symbol,
+        data: dataArray
+    }
 
-    var chartState = {
-        name: "",
-        data: null
-    }
-    if (seriesChart.length !== 0) {
-        chartState.name = data.Elements[0].Symbol;
-        chartState.data = dataArray;
-        seriesChart.push(chartState);
-        callNewYorkTimesApi(stockQuote[1].Name, displayNewsData2);
-        createChart(seriesChart);
-    } else {
-        chartState.name = data.Elements[0].Symbol;
-        chartState.data = dataArray;
-        seriesChart.push(chartState);
-        callNewYorkTimesApi(stockQuote[0].Name, displayNewsData1);
-    }
+    stockCharts.push(tempChart);
+    displayChart(stockCharts);
 }
 
-var displayNewsData1 = function(data) {
-    //var res = data.responseText;
-    console.log(data);
-    var newsResult = data.response.docs;
+var displayChart = function(data) {
+    /*
+        TODO: Change color of line
+    */
+    Highcharts.stockChart('chartDemoContainer', {
 
-    newsResult.forEach(function(elem) {
-        //console.log(elem); 
-        $('#news1').append(`<div class="col-6 news"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
+        rangeSelector: {
+            selected: 3 // Select default range like 3m 6m or 12m
+        },
+
+        yAxis: {
+            // Setup labels on the right
+            labels: {
+                formatter: function () {
+                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
+                }
+            },
+            // Setup 0 point line
+            plotLines: [{
+                value: 0,
+                width: 2,
+                color: 'silver'
+            }]
+        },
+
+        plotOptions: {
+            series: {
+                compare: 'percent',
+                showInNavigator: true // Show graph on the bottom
+            }
+        },
+
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+            valueDecimals: 2, // decimal point
+            split: true
+        },
+
+        series: data // This is where the data store
+    });
+}
+
+var callNewYorkTimesApi = function(searchTerm, callback) {
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+
+    url += '?' + $.param({
+        'api-key': "01c5c546907941af9428ba53d9625c9b",
+        'q': searchTerm,
+        'begin_date': "20161231",
+        'end_date': "20170130"
     });
 
-    return;
-    //console.log(data);
-}
-var displayNewsData2 = function(data) {
-
-    var newsResult = data.response.docs;
-
-    newsResult.forEach(function(elem) {
-        //console.log(elem); 
-        $('#news2').append(`<div class="col-6 news"><a href="${elem.web_url}">${elem.lead_paragraph}</a></div>`)           
+    $.ajax({
+        url: url,
+        method: 'GET',
+    }).done(function(result) {
+        callback(result, searchTerm);
+    }).fail(function(err) {
+        throw err;
     });
-
-    return;
-    //console.log(data);
-}
-var displayGuardianData = function(data) {
-
 }
 
-
-var callGlassdoorApi = function(searchTerm, callback) {
-    var GLASSDOOR_URL = 'https://api.glassdoor.com/api/api.htm';
-
-    var query = {
-        v: 1,
-        format: 'json',
-        't.p':"119004",
-        't.k': "gHME7vA2tRw",
-        userip:"0.0.0.0",
-        useragent:"Mozilla",
-        callback:displayGlassdoorData,
-        action: "employers",
-        q: searchTerm
+var displayStockNews = function(data, searchTerm) {
+    var news = {
+        company: searchTerm,
+        article: data.response.docs
     }
-    $.getJSON(GLASSDOOR_URL, query, callback);
+
+    stockNews.push(news);
+    $('.news').remove();
+    $('.companyNewsName').remove();
+    stockNews.forEach(function(stockElement) {
+        //console.log(stockElement);
+        $('#newsRow').append(`<h2 class="companyNewsName">${stockElement.company}</h2>`)
+        stockElement['article'].forEach(function(newsElement) {
+            // Put news in DOM
+            $('#newsRow').append(`<div class="col-12 news"><a href="${newsElement.web_url}">${newsElement.lead_paragraph}</a></div>`); 
+        })               
+    });
 }
 
-function displayGlassdoorData(data) {
-    console.log(data);
-}
-
-// Button one click
-$(".stock1").on('click', function(event) {
+$(".addStock").on('click', function(event) {
     event.preventDefault();
-    var search1 = $('#firstSearch').val();
-    callMarkitOnDemandApi(search1, displayStockData1);
-    //callNewYorkTimesApi(search1, displayNewsData1);
-    callMarkitOnDemandChartApi(search1, disaplyChart);
-    //callGlassdoorApi(search1, displayGlassdoorData);   
-})
+    var searchStock = $('#search').val();
+    $('#search').val('');
 
-$(".stock2").on('click', function(event) {
-    event.preventDefault();
+    // Hit Enter and Search
+    // If error, should show try again.
 
-    var search2 = $('#secondSearch').val();
-    callMarkitOnDemandApi(search2, displayStockData2); 
-    callMarkitOnDemandChartApi(search2, disaplyChart);
-})
+    callMarkitOnDemandApi(searchStock, displayStockData);
+    callMarkitOnDemandChartApi(searchStock, createChart); 
+});
 
 // Create initial state 
 // difference between IIFE?
 $(function() {
-    createChart([0]);
+    displayChart([0]);
 })
 
 

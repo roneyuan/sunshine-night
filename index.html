@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-	<meta >
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/grid.css" />
 	<link rel="stylesheet" href="css/main.css" />
 </head>
@@ -15,74 +15,40 @@
 				<div id="chartDemoContainer"></div>
 			</div>
 			<div class="col-4">
-				<h3> Stock 1 </h3>
-				<input type="text" name="firstSearch" id="firstSearch"></input>
-				<button class="stock1">Search</button>
-				<h3> Stock 2 </h3>
-				<input type="text" name="secondSearch" id="secondSearch"></input>
-				<button class="stock2">Search</button>
+				<h3> Enter Stock Symbol </h3>
+				<input type="text" name="search" id="search"></input>
+				<button class="addStock">Add</button>
 			</div>
 		</div>
 
 		
 		<div class="row">
 			<h2>Information</h2>
-			<div class="col-6">
+			<div class="col-12">
 				<div class="stock">
-					<table>
+					<table class="stock_list">
 					<tr>
 						<td>
 							Symbol
 						</td>
-						<td id="symbol1">
-						</td>
-						<td id="symbol2">					
-						</td>						
-					</tr>
-					<tr>
 						<td>
 							High
 						</td>
-						<td id="high1">							
-						</td>
-						<td id="high2">
-						</td>
-					</tr>
-					<tr>
 						<td>
 							Low
-						</td>
-						<td id="low1">							
-						</td>
-						<td id="low2">
-						</td>					
-					</tr>
-					<tr>
+						</td>	
 						<td>
 							Volume
 						</td>
-						<td id="volume1">							
-						</td>
-						<td id="volume2">
-						</td>					
-					</tr>
-					<tr>
 						<td>
 							MarketCap
-						</td>
-						<td id="marketcap1">							
 						</td>	
-						<td id="marketcap2">
-						</td>				
-					</tr>
-					<tr>
 						<td>
 							LastPrice
 						</td>
-						<td id="lastprice1">							
-						</td>	
-						<td id="lastprice2">
-						</td>				
+						<td>
+							Company's Name
+						</td>
 					</tr>
 					</table>
 				</div>					
@@ -91,11 +57,8 @@
 		
 		<div class="row">	
 			<h2>News</h2>
-			<div id="news1" class="col-6">	
-				<h3> Stock 1 </h3>				
-			</div>
-			<div id="news2" class="col-6">	
-				<h3> Stock 2</h3>				
+			<div id="newsRow" class="col-12">	
+				<h3> Stock News Lists </h3>				
 			</div>			
 		</div>
 	</main>
