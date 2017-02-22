@@ -29,8 +29,8 @@ var callMarkitOnDemandApi = function(searchTerm, callback) {
         url: MARKITONDEMAND_URL,
         dataType: "jsonp",
         success: callback,
-        error: callback
-    });
+        error: handleError
+    }); 
 }
 
 var displayStockData = function(data) {
@@ -206,16 +206,31 @@ var displayStockNews = function(data, searchTerm) {
     });
 }
 
+var handleError = function() {
+    alert("Please try again");
+}
+
 $(".addStock").on('click', function(event) {
     event.preventDefault();
     var searchStock = $('#search').val();
     $('#search').val('');
 
+
+    /*
+    TOD:
     // Hit Enter and Search
     // If error, should show try again.
+    // Prevent repeat
+    */
 
-    callMarkitOnDemandApi(searchStock, displayStockData);
-    callMarkitOnDemandChartApi(searchStock, createChart); 
+    var unifiedSearchTerm = searchStock.toUpperCase();
+    if (searchHistory.includes(unifiedSearchTerm)) {
+        alert("You have added " + searchStock);
+    } else {
+        searchHistory.push(unifiedSearchTerm);
+        callMarkitOnDemandApi(searchStock, displayStockData);
+        callMarkitOnDemandChartApi(searchStock, createChart);      
+    }
 });
 
 // Create initial state 
