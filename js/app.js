@@ -96,6 +96,7 @@ var callMarkitOnDemandChartApi = function(searchTerm, callback) {
                 console.error("Error: ", json.Message);
                 return;
             }
+            searchHistory.push(searchTerm.toUpperCase()); 
             createChart(json);
         },
         error: function(response,txtStatus){
@@ -201,7 +202,13 @@ var displayStockNews = function(data, searchTerm) {
         $('#newsRow').append(`<h2 class="companyNewsName">${stockElement.company}</h2>`)
         stockElement['article'].forEach(function(newsElement) {
             // Put news in DOM
-            $('#newsRow').append(`<div class="col-12 news"><a href="${newsElement.web_url}">${newsElement.lead_paragraph}</a></div>`); 
+            $('#newsRow').append(`<div class="col-12 news"><a href="${newsElement.web_url}">${newsElement.lead_paragraph}</a></div>`);
+            // JS Camel Case - CSS - under bar happened
+            // BEM - Block out modify naming convention in CSS
+            // CSS multi word - one dash for multiple words 
+            // JS usually CamelCase on the whole. leadParagraph. First letter Captialize iff for constructor function. 
+            // Most professional Consturctor pattern (No SV) or use the prototype pattern Object.create - has security vulunerbitilty.
+            // Best pattern - Class free pattern - model pattern. 
         })               
     });
 }
@@ -219,25 +226,43 @@ $(".addStock").on('click', function(event) {
     /*
     TOD:
     // Hit Enter and Search
-    // If error, should show try again.
-    // Prevent repeat
+    // If error, should show try again. - check
+    // Prevent repeat  - check
+    // Search and add button because it will generate error when add frequency too much
+    // If error happen, it will displaychart, but wont display information. Then searchHistory is added, unable to try
+    // again. Need to find out a way to fix it.
     */
 
     var unifiedSearchTerm = searchStock.toUpperCase();
     if (searchHistory.includes(unifiedSearchTerm)) {
         alert("You have added " + searchStock);
     } else {
-        searchHistory.push(unifiedSearchTerm);
+        //searchHistory.push(unifiedSearchTerm); // When the API call and push. Not here. Or do it with promise, success and failure.
         callMarkitOnDemandApi(searchStock, displayStockData);
         callMarkitOnDemandChartApi(searchStock, createChart);      
     }
 });
 
+
+// Style term - Use the pattern last longer. jQuery may not last longer. IIFE will last longer.
+
+
 // Create initial state 
 // difference between IIFE?
-$(function() {
+// $(function() { 
+//     displayChart([0]);
+// })
+
+// Better Style. Put () outside
+(function(){
     displayChart([0]);
-})
+})()
+
+
+// Work on Typography!
+// Get the text Strong! 
+// Make everything responsive!
+
 
 
 // Use map or foreach function to replace for loop
