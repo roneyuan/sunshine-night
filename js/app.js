@@ -34,39 +34,46 @@ var callMarkitOnDemandApi = function(searchTerm, callback) {
 }
 
 var displayStockData = function(data) {
-    var stockData = {
-        Change: data.Change,
-        ChangePercent: data.ChangePercent,
-        ChangePercentYTD: data.ChangePercentYTD,
-        ChangeYTD: data.ChangeYTD,
-        High: data.High,
-        LastPrice: data.LastPrice,
-        Low: data.Low,
-        MSDate: data.MSDate,
-        MarketCap: data.MarketCap,
-        Name: data.Name,
-        Open: data.Open,
-        Status: data.Status,
-        Symbol: data.Symbol,
-        Timestamp: data.Timestamp,
-        Volume: data.Volume
-    }   
 
-    stockQuote.push(stockData);
-    
-    $('.companyData').remove();
-    // Use foreach loop to create DOM
-    stockQuote.forEach(function(element) {
-        $('.stock_list').append(`<tr class="companyData"><td>${element.Symbol}</td>
-                                    <td>${element.High}</td>
-                                    <td>${element.Low}</td>
-                                    <td>${element.Volume}</td>
-                                    <td>${element.MarketCap}</td>
-                                    <td>${element.LastPrice}</td>
-                                    <td>${element.Name}</td></tr>`);
-    });
+    if (data.Status !== "SUCCESS") {
+        alert("Unable to find the symbol. Try Use Symbol Finder!"); // Feature adding soon... 
+        //handleError();
+    } else {
+        var stockData = {
+            Change: data.Change,
+            ChangePercent: data.ChangePercent,
+            ChangePercentYTD: data.ChangePercentYTD,
+            ChangeYTD: data.ChangeYTD,
+            High: data.High,
+            LastPrice: data.LastPrice,
+            Low: data.Low,
+            MSDate: data.MSDate,
+            MarketCap: data.MarketCap,
+            Name: data.Name,
+            Open: data.Open,
+            Status: data.Status,
+            Symbol: data.Symbol,
+            Timestamp: data.Timestamp,
+            Volume: data.Volume
+        }   
 
-    callNewYorkTimesApi(stockData.Name, displayStockNews);
+        stockQuote.push(stockData);
+        
+        $('.companyData').remove();
+        // Use foreach loop to create DOM
+        stockQuote.forEach(function(element) {
+            $('.stock_list').append(`<tr class="companyData"><td>${element.Symbol}</td>
+                                        <td>${element.High}</td>
+                                        <td>${element.Low}</td>
+                                        <td>${element.Volume}</td>
+                                        <td>${element.MarketCap}</td>
+                                        <td>${element.LastPrice}</td>
+                                        <td>${element.Name}</td></tr>`);
+        });
+
+        callNewYorkTimesApi(stockData.Name, displayStockNews);
+    }
+
 }
 
 var callMarkitOnDemandChartApi = function(searchTerm, callback) {
@@ -119,8 +126,9 @@ var createChart = function(data) {
 
     var tempChart = {
         name: data.Elements[0].Symbol,
-        data: dataArray
-    }
+        data: dataArray,
+        color: "#"+(Math.floor(Math.random()*16777215).toString(16)) //random color or preset?
+    };
 
     stockCharts.push(tempChart);
     displayChart(stockCharts);
@@ -133,7 +141,7 @@ var displayChart = function(data) {
     Highcharts.stockChart('chartDemoContainer', {
 
         rangeSelector: {
-            selected: 3 // Select default range like 3m 6m or 12m
+            selected: 4 // Select default range like 3m 6m or 12m
         },
 
         yAxis: {
@@ -234,12 +242,13 @@ $(".addStock").on('click', function(event) {
     */
 
     var unifiedSearchTerm = searchStock.toUpperCase();
+
     if (searchHistory.includes(unifiedSearchTerm)) {
         alert("You have added " + searchStock);
     } else {
         //searchHistory.push(unifiedSearchTerm); // When the API call and push. Not here. Or do it with promise, success and failure.
-        callMarkitOnDemandApi(searchStock, displayStockData);
-        callMarkitOnDemandChartApi(searchStock, createChart);      
+        callMarkitOnDemandApi(searchStock, displayStockData);      
+        callMarkitOnDemandChartApi(searchStock, createChart);    
     }
 });
 
