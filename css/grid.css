@@ -33,7 +33,7 @@
 
 .col-4 {
 	width: 33.33333%;
-	//background-color: yellow;
+	background-color: #FCFAE1;
 }
 
 .col-6 {
@@ -42,7 +42,7 @@
 
 .col-8 {
 	width: 66.66667%;
-	background-color: gray;
+	background-color: #ECF0F1;
 }
 
 .col-12 {

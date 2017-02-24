@@ -222,7 +222,7 @@ var displayStockNews = function(data, searchTerm) {
 }
 
 var handleError = function() {
-    alert("Please try again");
+    alert("Please try again"); /* TODO Need to change to another text to make more intuitive*/
 }
 
 $(".addStock").on('click', function(event) {
@@ -239,6 +239,10 @@ $(".addStock").on('click', function(event) {
     // Search and add button because it will generate error when add frequency too much
     // If error happen, it will displaychart, but wont display information. Then searchHistory is added, unable to try
     // again. Need to find out a way to fix it.
+
+    // CHANGE TYPOGRAPHY
+
+    // News in mobile does not display well
     */
 
     var unifiedSearchTerm = searchStock.toUpperCase();
