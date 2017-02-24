@@ -222,13 +222,13 @@ var displayStockNews = function(data, searchTerm) {
             }
 
             if (newsElement.multimedia.length > 2) {
-                imageUrl = newsElement.multimedia[2].url;
+                imageUrl = "http://nytimes.com/" + newsElement.multimedia[2].url;
             } else {
-                imageUrl = "";
+                imageUrl = "../img/unavailable.png";
             }
 
 
-            $('#newsRow').append(`<div class="col-12 newsFrame"><div class="col-4"><img src="http://nytimes.com/${imageUrl}" />
+            $('#newsRow').append(`<div class="col-12 newsFrame"><div class="col-4"><img src="${imageUrl}" />
                 </div><div class="col-8"><button class="news"><a href="${newsElement.web_url}">${title}</a></button></div></div>`);
             // JS Camel Case - CSS - under bar happened
             // BEM - Block out modify naming convention in CSS
