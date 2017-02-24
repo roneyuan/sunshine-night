@@ -199,18 +199,36 @@ var callNewYorkTimesApi = function(searchTerm, callback) {
 var displayStockNews = function(data, searchTerm) {
     var news = {
         company: searchTerm,
-        article: data.response.docs
+        article: data.response.docs,
     }
 
     stockNews.push(news);
-    $('.news').remove();
+    console.log(stockNews);
+    $('.newsFrame').remove();
     $('.companyNewsName').remove();
+
+    let title = "";
+    let imageUrl = "";
+
     stockNews.forEach(function(stockElement) {
         //console.log(stockElement);
         $('#newsRow').append(`<h2 class="companyNewsName">${stockElement.company}</h2>`)
         stockElement['article'].forEach(function(newsElement) {
             // Put news in DOM
-            $('#newsRow').append(`<div class="col-12 news"><a href="${newsElement.web_url}">${newsElement.lead_paragraph}</a></div>`);
+            if (newsElement.lead_paragraph.length > 80) {
+                title = newsElement.lead_paragraph.substring(0,79) + "...";
+            } else {
+                title = newsElement.lead_paragraph;
+            }
+
+            if (newsElement.multimedia.length > 2) {
+                imageUrl = newsElement.multimedia[2].url;
+            } else {
+                imageUrl = "";
+            }
+
+
+            $('#newsRow').append(`<div class="col-12 newsFrame"><img src="http://nytimes.com/${imageUrl}" /><button class="news"><a href="${newsElement.web_url}">${title}</a></button></div>`);
             // JS Camel Case - CSS - under bar happened
             // BEM - Block out modify naming convention in CSS
             // CSS multi word - one dash for multiple words 
@@ -243,6 +261,8 @@ $(".addStock").on('click', function(event) {
     // CHANGE TYPOGRAPHY
 
     // News in mobile does not display well
+
+    // Reason why it will have the error for third time is that limit is 10 requests per 60 seconds
     */
 
     var unifiedSearchTerm = searchStock.toUpperCase();
