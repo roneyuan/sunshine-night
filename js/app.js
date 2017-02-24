@@ -182,8 +182,8 @@ var callNewYorkTimesApi = function(searchTerm, callback) {
     url += '?' + $.param({
         'api-key': "01c5c546907941af9428ba53d9625c9b",
         'q': searchTerm,
-        'begin_date': "20161231",
-        'end_date': "20170130"
+        'begin_date': "20170201",
+        'end_date': "20170223"
     });
 
     $.ajax({
@@ -215,8 +215,8 @@ var displayStockNews = function(data, searchTerm) {
         $('#newsRow').append(`<h2 class="companyNewsName">${stockElement.company}</h2>`)
         stockElement['article'].forEach(function(newsElement) {
             // Put news in DOM
-            if (newsElement.lead_paragraph.length > 80) {
-                title = newsElement.lead_paragraph.substring(0,79) + "...";
+            if (newsElement.lead_paragraph.length > 90) {
+                title = newsElement.lead_paragraph.substring(0,89) + "...";
             } else {
                 title = newsElement.lead_paragraph;
             }
@@ -228,8 +228,8 @@ var displayStockNews = function(data, searchTerm) {
             }
 
 
-            $('#newsRow').append(`<div class="col-12 newsFrame"><div class="col-4"><img src="${imageUrl}" />
-                </div><div class="col-8"><button class="news"><a href="${newsElement.web_url}">${title}</a></button></div></div>`);
+            $('#newsRow').append(`<div class="col-12 newsFrame"><a href="${newsElement.web_url}"><div class="col-4 newsImage"><img src="${imageUrl}" />
+                </div><div class="col-6"><button class="news">${title}</button></div></a></div>`);
             // JS Camel Case - CSS - under bar happened
             // BEM - Block out modify naming convention in CSS
             // CSS multi word - one dash for multiple words 
