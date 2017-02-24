@@ -228,7 +228,8 @@ var displayStockNews = function(data, searchTerm) {
             }
 
 
-            $('#newsRow').append(`<div class="col-12 newsFrame"><img src="http://nytimes.com/${imageUrl}" /><button class="news"><a href="${newsElement.web_url}">${title}</a></button></div>`);
+            $('#newsRow').append(`<div class="col-12 newsFrame"><div class="col-4"><img src="http://nytimes.com/${imageUrl}" />
+                </div><div class="col-8"><button class="news"><a href="${newsElement.web_url}">${title}</a></button></div></div>`);
             // JS Camel Case - CSS - under bar happened
             // BEM - Block out modify naming convention in CSS
             // CSS multi word - one dash for multiple words 
