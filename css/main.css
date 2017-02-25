@@ -40,10 +40,6 @@ tr {
 	margin-bottom: 5%;
 }
 
-.stockChart {
-	/*background-color: #ECF0F1;*/
-	/*margin-top: 5%;*/
-}
 
 #search {
 	width: 90%;
@@ -62,7 +58,22 @@ tr {
 	width: 8%;
 	height: 40px;
 	font-size: 25px;
+	border-radius: 5px;
+	border: 0px;
+	font-family: 'Playfair Display', serif;
+	background-color: #9accff;
+	cursor: pointer;
+	outline: none;
+	color: #F9F9F9;
 }
+
+.stock {
+	overflow-x: auto; /* Responsive table*/
+	background-color: #e2f3ff;
+	border-radius: 5px;
+}
+
+.stockList { padding: 15px 15px; }
 
 .news {
 
@@ -102,14 +113,7 @@ a {
 	height: 75px;
 }
 
-.stock {
-	overflow-x: auto; /* Responsive table*/
-	background-color: #f1f1f1;
-}
 
-.stockList {
-	padding: 15px 15px;
-}
 
 @media only screen and (max-width: 640px) {
 	h2 {
