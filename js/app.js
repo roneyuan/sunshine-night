@@ -135,9 +135,6 @@ var createChart = function(data) {
 }
 
 var displayChart = function(data) {
-    /*
-        TODO: Change color of line
-    */
     Highcharts.stockChart('chartDemoContainer', {
 
         rangeSelector: {
@@ -211,7 +208,6 @@ var displayStockNews = function(data, searchTerm) {
     let imageUrl = "";
 
     stockNews.forEach(function(stockElement) {
-        //console.log(stockElement);
         $('#newsRow').append(`<h3 class="companyNewsName">${stockElement.company}</h3>`)
         stockElement['article'].forEach(function(newsElement) {
             // Put news in DOM
@@ -222,14 +218,19 @@ var displayStockNews = function(data, searchTerm) {
             }
 
             if (newsElement.multimedia.length > 2) {
-                imageUrl = "http://nytimes.com/" + newsElement.multimedia[2].url;
+                imageUrl = "http://nytimes.com/" + newsElement.multimedia[0].url;
             } else {
                 imageUrl = "../img/unavailable.png";
             }
 
-
-            $('#newsRow').append(`<div class="col-12 newsFrame"><a target="_blank" href="${newsElement.web_url}"><div class="col-4 newsImage"><img src="${imageUrl}" />
-                </div><div class="col-6"><button class="news">${title}</button></div></a></div>`);
+            $('#newsRow').append(`<div class="col-12 newsFrame">                         
+                                        <a target="_blank" href="${newsElement.web_url}">
+                                            <div class="news">
+                                                <div class="col-4 newsImage"><img src="${imageUrl}" /></div>
+                                                <div class="col-8 newsTitle"><button class="news">${title}</button></div>
+                                            </div>
+                                        </a>
+                                  </div>`);
             // JS Camel Case - CSS - under bar happened
             // BEM - Block out modify naming convention in CSS
             // CSS multi word - one dash for multiple words 
