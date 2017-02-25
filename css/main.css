@@ -88,14 +88,14 @@ tr {
 }*/
 
 .news {
-	border-radius:2px;
+	border-radius:5px;
 	width: 100%;
 	height: 100%;
 	cursor:pointer;
 	border: 2px;
 	box-shadow:none;
 	text-align: left;	
-	background-color: aqua;
+	background-color: #ecf8ff;
 	/*//background-color:#F3FFE2;
 	//padding-top: 20px;
 	//padding-bottom: 20px;
