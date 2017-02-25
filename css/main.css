@@ -69,11 +69,12 @@ tr {
 
 .stock {
 	overflow-x: auto; /* Responsive table*/
-	background-color: #e2f3ff;
+	background-color: #E2F3FF;
 	border-radius: 5px;
 }
 
 .stockList { padding: 15px 15px; }
+
 
 .news {
 
