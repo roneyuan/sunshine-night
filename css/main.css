@@ -1,5 +1,11 @@
-h2 { font-family: 'Josefin Sans', sans-serif; }
+h2 { 
+	font-family: 'Josefin Sans', sans-serif;
+	margin-top: 5%;
+}
 
+h2, h3 {
+	text-align: left;
+}
 main, a, .news {
 	/* Font size 15 - 25 or */
 	font-size: 18px;
@@ -11,7 +17,8 @@ ul { list-style-type: none; }
 
 li { display: inline-block; }
 
-td { padding-left: 30px;
+td { 
+	padding-left: 30px;
 	padding-right: 30px;
  }
 
@@ -21,17 +28,40 @@ tr {
 	padding-bottom: 2px;
 }
 
-.stockSymbol, .stockChart {
+.stockSearch, .stockChart {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
-.stockSymbol {
-	background-color: #FCFAE1;
+.stockSearch {
+	background-color: #FFFFFF;
+	text-align: left;
+	margin-top: 5%;
+	margin-bottom: 5%;
 }
 
 .stockChart {
-	background-color: #ECF0F1;
+	/*background-color: #ECF0F1;*/
+	/*margin-top: 5%;*/
+}
+
+#search {
+	width: 90%;
+	height: 40px;
+	font-size: 25px;
+	background-color: #F1F1F1;
+	outline: none;
+	box-shadow: none;
+	border-radius: 5px;
+	border: 0px;
+	font-family: 'Playfair Display', serif;
+	padding-left: 10px;
+}
+
+.addStock {
+	width: 8%;
+	height: 40px;
+	font-size: 25px;
 }
 
 .news {
@@ -74,8 +104,15 @@ a {
 
 .stock {
 	overflow-x: auto; /* Responsive table*/
-	background-color: #ACF0F2;
+	background-color: #f1f1f1;
+}
+
+.stockList {
+	padding: 15px 15px;
 }
 
 @media only screen and (max-width: 640px) {
+	h2 {
+		margin-top: 10%;
+	}
 }

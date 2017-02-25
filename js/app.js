@@ -62,7 +62,7 @@ var displayStockData = function(data) {
         $('.companyData').remove();
         // Use foreach loop to create DOM
         stockQuote.forEach(function(element) {
-            $('.stock_list').append(`<tr class="companyData"><td>${element.Symbol}</td>
+            $('.stockList').append(`<tr class="companyData"><td>${element.Symbol}</td>
                                         <td>${element.High}</td>
                                         <td>${element.Low}</td>
                                         <td>${element.Volume}</td>
@@ -212,7 +212,7 @@ var displayStockNews = function(data, searchTerm) {
 
     stockNews.forEach(function(stockElement) {
         //console.log(stockElement);
-        $('#newsRow').append(`<h2 class="companyNewsName">${stockElement.company}</h2>`)
+        $('#newsRow').append(`<h3 class="companyNewsName">${stockElement.company}</h3>`)
         stockElement['article'].forEach(function(newsElement) {
             // Put news in DOM
             if (newsElement.lead_paragraph.length > 90) {
@@ -228,7 +228,7 @@ var displayStockNews = function(data, searchTerm) {
             }
 
 
-            $('#newsRow').append(`<div class="col-12 newsFrame"><a href="${newsElement.web_url}"><div class="col-4 newsImage"><img src="${imageUrl}" />
+            $('#newsRow').append(`<div class="col-12 newsFrame"><a target="_blank" href="${newsElement.web_url}"><div class="col-4 newsImage"><img src="${imageUrl}" />
                 </div><div class="col-6"><button class="news">${title}</button></div></a></div>`);
             // JS Camel Case - CSS - under bar happened
             // BEM - Block out modify naming convention in CSS

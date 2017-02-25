@@ -12,13 +12,15 @@
 	<header></header>
 	<main>
 		<div class="row">
-			<div class="col-4 stockSymbol">
-				<h3> Enter Stock Symbol </h3>
-				<input type="text" name="search" id="search"></input>
+			<div class="col-12 stockSearch">
+				<h2> Enter Stock Symbol </h2>
+				<input type="text" name="search" id="search" placeholder="EX: AAPL"></input>
 				<button class="addStock">Add</button>
 			</div>
 
-			<div class="col-8 stockChart">
+			<hr>
+
+			<div class="col-12 stockChart">
 				<h2>Chart</h2>
 				<div id="chartDemoContainer"></div>
 			</div>
@@ -30,7 +32,7 @@
 			<h2>Information</h2>
 			<div class="col-12">
 				<div class="stock">
-					<table class="stock_list">
+					<table class="stockList">
 					<tr>
 						<td>
 							Symbol
@@ -61,8 +63,7 @@
 		
 		<div class="row">	
 			<h2>News</h2>
-			<div id="newsRow" class="col-12">	
-				<h3> Stock News Lists </h3>				
+			<div id="newsRow" class="col-12">					
 			</div>			
 		</div>
 	</main>
