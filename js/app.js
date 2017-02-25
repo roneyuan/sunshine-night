@@ -223,11 +223,11 @@ var displayStockNews = function(data, searchTerm) {
                 imageUrl = "../img/unavailable.png";
             }
 
-            $('#newsRow').append(`<div class="col-12 newsFrame">                         
+            $('#newsRow').append(`<div class="newsFrame">                         
                                         <a target="_blank" href="${newsElement.web_url}">
                                             <div class="news">
                                                 <div class="col-4 newsImage"><img src="${imageUrl}" /></div>
-                                                <div class="col-8 newsTitle"><button class="news">${title}</button></div>
+                                                <div class="col-8 newsTitle">${title}</div>
                                             </div>
                                         </a>
                                   </div>`);
