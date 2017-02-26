@@ -1,6 +1,6 @@
 h2 { 
 	font-family: 'Josefin Sans', sans-serif;
-	margin-top: 5%;
+	margin-top: 5%;	
 }
 
 h2, h3 {
@@ -68,6 +68,19 @@ tr {
 	color: #F9F9F9;
 }
 
+.stockHeader, .newsHeader {
+	background-color: #4992ff;
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.newsHeader { /*news-header*/
+	background-color: #5f77ea
+}
+
 .stock {
 	overflow-x: auto; /* Responsive table*/
 	background-color: #E2F3FF;
@@ -105,7 +118,7 @@ tr {
 	border: 2px;
 	box-shadow:none;
 	text-align: left;	
-	background-color: #ecf8ff;
+	background-color: #dae4f1;
 	font-size: 18px;
 	line-height: 120%;
 	font-family: 'Playfair Display', serif;
@@ -119,7 +132,7 @@ tr {
 .newsFrame:hover {
 	/*background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);*/
 	border-radius: 5px;
-	background-color:#A9B6BF;
+	background-color:#9c9bec;
 }
 
 .companyData td:hover {
@@ -140,7 +153,7 @@ tr {
 	border: 2px;
 	box-shadow:none;
 	text-align: left;	
-	background-color: #ecf8ff;
+	background-color: #dae4f1;
 	font-size: 18px;
 	line-height: 120%;
 	font-family: 'Playfair Display', serif;

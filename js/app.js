@@ -106,6 +106,7 @@ var callMarkitOnDemandChartApi = function(searchTerm, callback) {
             createChart(json);
         },
         error: function(response,txtStatus){
+            handleError()
             console.log(response,txtStatus)
         }
     });
