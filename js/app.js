@@ -73,7 +73,6 @@ var displayStockData = function(data) {
 
         callNewYorkTimesApi(stockData.Name, displayStockNews);
     }
-
 }
 
 var callMarkitOnDemandChartApi = function(searchTerm, callback) {
@@ -180,7 +179,7 @@ var callNewYorkTimesApi = function(searchTerm, callback) {
         'api-key': "01c5c546907941af9428ba53d9625c9b",
         'q': searchTerm,
         'begin_date': "20170201",
-        'end_date': "20170223"
+        'end_date': "20170223" /*TODO Get most recent date*/
     });
 
     $.ajax({
