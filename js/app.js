@@ -227,7 +227,7 @@ var displayStockNews = function(data, searchTerm) {
                                         <a target="_blank" href="${newsElement.web_url}">
                                             <div class="news">
                                                 <div class="col-4 newsImage"><img src="${imageUrl}" /></div>
-                                                <div class="col-8 newsTitle"><button class="news">${title}</button></div>
+                                                <div class="col-8 newsTitle"><button class="newsButton">${title}</button></div>
                                             </div>
                                         </a>
                                   </div>`);

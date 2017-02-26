@@ -5,8 +5,9 @@ h2 {
 
 h2, h3 {
 	text-align: left;
+	margin-top: 5%;
 }
-main, a, .news {
+main, a {
 	/* Font size 15 - 25 or */
 	font-size: 18px;
 	line-height: 120%;
@@ -96,12 +97,31 @@ tr {
 	box-shadow:none;
 	text-align: left;	
 	background-color: #ecf8ff;
+	font-size: 18px;
+	line-height: 120%;
+	font-family: 'Playfair Display', serif;
 	/*//background-color:#F3FFE2;
 	//padding-top: 20px;
 	//padding-bottom: 20px;
 	*/
 }
-
+.newsButton {
+	border-radius:5px;
+	width: 100%;
+	height: 100%;
+	cursor:pointer;
+	border: 2px;
+	box-shadow:none;
+	text-align: left;	
+	background-color: #ecf8ff;
+	font-size: 18px;
+	line-height: 120%;
+	font-family: 'Playfair Display', serif;
+	/*//background-color:#F3FFE2;
+	//padding-top: 20px;
+	//padding-bottom: 20px;
+	*/
+}
 .newsTitle {
 	//background-color: yellow;
 }
@@ -113,6 +133,7 @@ tr {
 .newsImage {
 	padding-top: 17px;
 }
+
 a {
 	text-decoration: none; /* Take out the underline */
 /*	padding-top: 20px;
@@ -127,8 +148,27 @@ a {
 	
 
 
-@media only screen and (max-width: 640px) {
-	h2 {
+@media only screen and (max-width: 768px) {
+	h2, h3 {
 		margin-top: 10%;
+	}
+	#search {
+		width: 80%;
+	}
+	.addStock {
+		width: 18%;
+
+	}
+	.newsFrame {
+		height: 300px;
+	}
+	.newsImage {
+		height:180px;
+	}
+	.newsButton {
+		height: 50%;
+	}
+	.newsTitle {
+		height: 100px;
 	}
 }
