@@ -252,7 +252,7 @@ var displayStockNews = function(data, searchTerm) {
 }
 
 var handleError = function() {
-    alert("Please try again"); /* TODO Need to change to another text to make more intuitive*/
+    alert("Oops! This is a free version, which only allows 2 API calls in 10 seconds."); /* TODO Need to change to another text to make more intuitive*/
 }
 
 $(".addStock").on('click', function(event) {
