@@ -14,8 +14,10 @@
 		<div class="row">
 			<div class="col-12 stockSearch">
 				<h2> Enter Stock Symbol </h2>
-				<input type="text" autocomplete="off" name="search" id="search" placeholder="EX: AAPL"></input>
-				<button class="addStock">Add</button>
+				<form class="submitSymbol">
+					<input type="text" autocomplete="off" name="search" id="search" placeholder="EX: AAPL"></input>
+					<button type="submit" class="addStock">Add</button>
+				</form>
 			</div>
 
 			<hr>
@@ -52,7 +54,7 @@
 			<div id="newsRow" class="col-12"></div>			
 		</div>
 	</main>
-	
+
 	<footer></footer>
 	<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>	
