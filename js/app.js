@@ -175,12 +175,22 @@ var displayChart = function(data) {
 
 var callNewYorkTimesApi = function(searchTerm, callback) {
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-
+    var today = new Date();
+    var year = String(today.getFullYear());
+    var month = String(today.getMonth() + 1);
+    if (today.getMonth()+1 < 10) { month = "0" + month }
+    var day = String(today.getDate()); 
+    var lastWeek = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    var lastWeekMonth = String(lastWeek.getMonth() + 1);
+    if (lastWeek.getMonth()+1 < 10) { lastWeekMonth = "0" + lastWeekMonth }
+    var beginDate = String(lastWeek.getFullYear()) + lastWeekMonth + String(lastWeek.getDate());
+    var endDate = year + month + day;
+    //console.log(beginDate);
     url += '?' + $.param({
         'api-key': "01c5c546907941af9428ba53d9625c9b",
         'q': searchTerm,
-        'begin_date': "20170201",
-        'end_date': "20170223" /*TODO Get most recent date*/
+        'begin_date': beginDate,
+        'end_date': endDate /*TODO Get most recent date*/
     });
 
     $.ajax({
