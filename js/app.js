@@ -208,7 +208,7 @@ var displayStockNews = function(data, searchTerm) {
     let imageUrl = "";
 
     stockNews.forEach(function(stockElement) {
-        $('#newsRow').append(`<h3 class="companyNewsName">${stockElement.company}</h3>`)
+        $('#newsRow').append(`<div class="col-12 companyNewsName">${stockElement.company}</div>`)
         stockElement['article'].forEach(function(newsElement) {
             // Put news in DOM
             if (newsElement.lead_paragraph.length > 90) {
