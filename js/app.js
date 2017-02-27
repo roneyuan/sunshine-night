@@ -216,31 +216,48 @@ var displayStockNews = function(data, searchTerm) {
 
     let title = "";
     let imageUrl = "";
+    let newsContent = "";
 
     stockNews.forEach(function(stockElement) {
         $('#newsRow').append(`<div class="col-12 companyNewsName">${stockElement.company}</div>`)
         stockElement['article'].forEach(function(newsElement) {
             // Put news in DOM
-            if (newsElement.lead_paragraph.length > 90) {
-                title = newsElement.lead_paragraph.substring(0,89) + "...";
+            if (newsElement.headline.main.length > 90) {
+                title = newsElement.headline.main.substring(0,89) + "...";
             } else {
-                title = newsElement.lead_paragraph;
+                title = newsElement.headline.main;
             }
 
             if (newsElement.multimedia.length > 2) {
                 imageUrl = "http://nytimes.com/" + newsElement.multimedia[0].url;
+                newsContent = `<div class="col-12 newsFrame">                         
+                                    <a target="_blank" href="${newsElement.web_url}">
+                                        <div class="news">
+                                            <div class="col-4 newsImage"><img src="${imageUrl}" alt="" /></div>
+                                            <div class="col-8 newsTitle"><button class="newsButton">
+                                            <div class="title">${title}</div>
+                                            <p>
+                                            <div class="paragraph">${newsElement.lead_paragraph}</div>
+                                            </button></div>
+                                        </div>
+                                    </a>
+                                </div>`
             } else {
-                imageUrl = "../img/unavailable.png";
+                imageUrl = "";
+                newsContent = `<div class="col-12 newsFrame">                         
+                                    <a target="_blank" href="${newsElement.web_url}">
+                                        <div class="news">
+                                            <div class="col-12 newsTitle"><button class="newsButtonNoImage">
+                                            <div class="title">${title}</div>
+                                            <p>
+                                            <div class="paragraph">${newsElement.lead_paragraph}</div>
+                                            </button></div>
+                                        </div>
+                                    </a>
+                                </div>`
             }
 
-            $('#newsRow').append(`<div class="col-12 newsFrame">                         
-                                        <a target="_blank" href="${newsElement.web_url}">
-                                            <div class="news">
-                                                <div class="col-4 newsImage"><img src="${imageUrl}" /></div>
-                                                <div class="col-8 newsTitle"><button class="newsButton">${title}</button></div>
-                                            </div>
-                                        </a>
-                                  </div>`);
+            $('#newsRow').append(newsContent);
             // JS Camel Case - CSS - under bar happened
             // BEM - Block out modify naming convention in CSS
             // CSS multi word - one dash for multiple words 
