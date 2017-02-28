@@ -234,11 +234,11 @@ var displayStockNews = function(data, searchTerm) {
                                     <a target="_blank" href="${newsElement.web_url}">
                                         <div class="news">
                                             <div class="col-4 newsImage"><img src="${imageUrl}" alt="" /></div>
-                                            <div class="col-8 newsTitle"><button class="newsButton">
+                                            <div class="col-8 newsTitle"><div class="newsButton">
                                             <div class="title">${title}</div>
                                             <p>
                                             <div class="paragraph">${newsElement.lead_paragraph}</div>
-                                            </button></div>
+                                            </div></div>
                                         </div>
                                     </a>
                                 </div>`
@@ -247,11 +247,11 @@ var displayStockNews = function(data, searchTerm) {
                 newsContent = `<div class="col-12 newsFrame">                         
                                     <a target="_blank" href="${newsElement.web_url}">
                                         <div class="news">
-                                            <div class="col-12 newsTitle"><button class="newsButtonNoImage">
+                                            <div class="col-12 newsTitle"><div class="newsButtonNoImage">
                                             <div class="title">${title}</div>
                                             <p>
                                             <div class="paragraph">${newsElement.lead_paragraph}</div>
-                                            </button></div>
+                                            </div></div>
                                         </div>
                                     </a>
                                 </div>`
