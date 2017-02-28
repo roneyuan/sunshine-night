@@ -170,10 +170,12 @@ tr {
 .title {
 	font-weight: bold;
 	font-size: 24px;
+	line-height: 120%;
 }
 
 .paragraph {
 	font-size: 16px;
+	line-height: 120%;
 }
 
 .newsImage {
@@ -200,7 +202,7 @@ a {
 	
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) { /*min width imply to mobile first*/
 	h2, h3 {
 		margin-top: 10%;
 	}
@@ -210,12 +212,15 @@ a {
 	}
 
 	#search {
-		width: 80%;
+		width: 70%;
+	}
+
+	.addStock span {
+		text-align: center;
 	}
 
 	.addStock {
-		width: 18%;
-
+		width: 28%;
 	}
 
 	.newsFrame {
@@ -223,11 +228,12 @@ a {
 	}
 
 	.newsImage {
-		height:180px;
+		/*height:180px;*/
+		padding-bottom: 20px;
 	}
 
 	.newsButton {
-		height: 50%;
+		/*height: 50%;*/
 	}
 
 	.newsTitle {
@@ -237,4 +243,10 @@ a {
 	.companyNewsName {
 		margin-top: 10%;
 	}
+
+	.noImage {
+		padding-top: 50px;
+	}
+
+	/*News Padding top 50px*/
 }
