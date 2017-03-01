@@ -1,29 +1,8 @@
 
-var callGlassdoorApi = function(searchTerm, callback) {
-    var GLASSDOOR_URL = 'https://api.glassdoor.com/api/api.htm';
-
-    var query = {
-        v: 1,
-        format: 'json',
-        't.p':"119004",
-        't.k': "gHME7vA2tRw",
-        userip:"0.0.0.0",
-        useragent:"Mozilla",
-        callback:displayGlassdoorData,
-        action: "employers",
-        q: searchTerm
-    }
-    $.getJSON(GLASSDOOR_URL, query, callback);
-}
-
-function displayGlassdoorData(data) {
-    console.log(data);
-}
 
 var callMarkitOnDemandApi = function(searchTerm, callback) {
-    var MARKITONDEMAND_URL = "http://dev.markitondemand.com/Api/v2/Quote/jsonp"; // Has to be jsonp in order to display data
+    var MARKITONDEMAND_URL = "http://dev.markitondemand.com/Api/v2/Quote/jsonp"; 
 
-    // Does not work using $.getJSON. It needs to use $.ajax
     $.ajax({
         data: { symbol: searchTerm },
         url: MARKITONDEMAND_URL,
@@ -36,8 +15,7 @@ var callMarkitOnDemandApi = function(searchTerm, callback) {
 var displayStockData = function(data) {
 
     if (data.Status !== "SUCCESS") {
-        alert("Unable to find the symbol. Try Use Symbol Finder!"); // Feature adding soon... 
-        //handleError();
+        alert("Unable to find the symbol. Try Use Symbol Finder!"); /* TODO Symbo Finder */
     } else {
         var stockData = {
             Change: data.Change,
@@ -60,7 +38,7 @@ var displayStockData = function(data) {
         stockQuote.push(stockData);
         
         $('.companyData').remove();
-        // Use foreach loop to create DOM
+
         stockQuote.forEach(function(element) {
             $('.stockList').append(`<tr class="companyData"><td>${element.Symbol}</td>
                                         <td>${element.High}</td>
@@ -113,7 +91,6 @@ var callMarkitOnDemandChartApi = function(searchTerm, callback) {
 }
 
 var createChart = function(data) {
-    // 2d array where inner array respresent ohlc. That data was scatterd over by object.
     var dataArray = [];
     var tempArray = [];
 
@@ -127,7 +104,7 @@ var createChart = function(data) {
     var tempChart = {
         name: data.Elements[0].Symbol,
         data: dataArray,
-        color: "#"+(Math.floor(Math.random()*16777215).toString(16)) //random color or preset?
+        color: "#"+(Math.floor(Math.random()*16777215).toString(16)) //random color, sometimes might be transparent
     };
 
     stockCharts.push(tempChart);
@@ -185,12 +162,12 @@ var callNewYorkTimesApi = function(searchTerm, callback) {
     if (lastWeek.getMonth()+1 < 10) { lastWeekMonth = "0" + lastWeekMonth }
     var beginDate = String(lastWeek.getFullYear()) + lastWeekMonth + String(lastWeek.getDate());
     var endDate = year + month + day;
-    //console.log(beginDate);
+
     url += '?' + $.param({
         'api-key': "01c5c546907941af9428ba53d9625c9b",
         'q': searchTerm,
-        'begin_date': beginDate,
-        'end_date': endDate /*TODO Get most recent date*/
+        'begin_date': beginDate, // today - 7 days
+        'end_date': endDate  // today
     });
 
     $.ajax({
@@ -221,7 +198,6 @@ var displayStockNews = function(data, searchTerm) {
     stockNews.forEach(function(stockElement) {
         $('#newsRow').append(`<div class="col-12 companyNewsName">${stockElement.company}</div>`)
         stockElement['article'].forEach(function(newsElement) {
-            // Put news in DOM
             if (newsElement.headline.main.length > 90) {
                 title = newsElement.headline.main.substring(0,89) + "...";
             } else {
@@ -258,41 +234,40 @@ var displayStockNews = function(data, searchTerm) {
             }
 
             $('#newsRow').append(newsContent);
-            // JS Camel Case - CSS - under bar happened
-            // BEM - Block out modify naming convention in CSS
-            // CSS multi word - one dash for multiple words 
-            // JS usually CamelCase on the whole. leadParagraph. First letter Captialize iff for constructor function. 
-            // Most professional Consturctor pattern (No SV) or use the prototype pattern Object.create - has security vulunerbitilty.
-            // Best pattern - Class free pattern - model pattern. 
         })               
     });
 }
 
 var handleError = function() {
-    alert("Oops! This is a free version, which only allows 2 API calls in 10 seconds."); /* TODO Need to change to another text to make more intuitive*/
+    alert("Oops! This is a free version, which only allows 2 API calls in 10 seconds."); 
+}
+
+/*CORS Issue with Glassdoor*/
+var callGlassdoorApi = function(searchTerm, callback) {
+    var GLASSDOOR_URL = 'https://api.glassdoor.com/api/api.htm';
+
+    var query = {
+        v: 1,
+        format: 'json',
+        't.p':"119004",
+        't.k': "gHME7vA2tRw",
+        userip:"0.0.0.0",
+        useragent:"Mozilla",
+        callback:displayGlassdoorData,
+        action: "employers",
+        q: searchTerm
+    }
+    $.getJSON(GLASSDOOR_URL, query, callback);
+}
+
+function displayGlassdoorData(data) {
+    console.log(data);
 }
 
 $(".addStock").on('click', function(event) {
     event.preventDefault();
     var searchStock = $('#search').val();
     $('#search').val('');
-
-
-    /*
-    TOD:
-    // Hit Enter and Search
-    // If error, should show try again. - check
-    // Prevent repeat  - check
-    // Search and add button because it will generate error when add frequency too much
-    // If error happen, it will displaychart, but wont display information. Then searchHistory is added, unable to try
-    // again. Need to find out a way to fix it.
-
-    // CHANGE TYPOGRAPHY
-
-    // News in mobile does not display well
-
-    // Reason why it will have the error for third time is that limit is 10 requests per 60 seconds
-    */
 
     var unifiedSearchTerm = searchStock.toUpperCase();
 
@@ -305,37 +280,11 @@ $(".addStock").on('click', function(event) {
     }
 });
 
-
-// Style term - Use the pattern last longer. jQuery may not last longer. IIFE will last longer.
-
-
-// Create initial state 
-// difference between IIFE?
-// $(function() { 
-//     displayChart([0]);
-// })
-
 // Better Style. Put () outside
 (function(){
     displayChart([0]);
 })()
 
-
-// Work on Typography!
-// Get the text Strong! 
-// Make everything responsive!
-
-
-
-// Use map or foreach function to replace for loop
-// Avoid using for loop
-// for loop might freeze up...
-
-// When we get question about challenges
-// Trying to figure to good story to tell people. Every day story happened
-// Interesting problems you solved. When something happen, interesting way to solve
-
-// Recorder interesting problems you solved
 
 
 
