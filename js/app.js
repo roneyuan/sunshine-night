@@ -156,7 +156,8 @@ var callNewYorkTimesApi = function(searchTerm, callback) {
     var year = String(today.getFullYear());
     var month = String(today.getMonth() + 1);
     if (today.getMonth()+1 < 10) { month = "0" + month }
-    var day = String(today.getDate()); 
+    var day = String(today.getDate());
+    if (today.getDate() < 10) { day = "0" + day } 
     var lastWeek = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
     var lastWeekMonth = String(lastWeek.getMonth() + 1);
     if (lastWeek.getMonth()+1 < 10) { lastWeekMonth = "0" + lastWeekMonth }
@@ -205,7 +206,7 @@ var displayStockNews = function(data, searchTerm) {
             }
 
             if (newsElement.multimedia.length > 2) {
-                imageUrl = "http://nytimes.com/" + newsElement.multimedia[0].url;
+                imageUrl = "http://nytimes.com/" + newsElement.multimedia[2].url;
                 newsContent = `<div class="col-12 newsFrame">                         
                                     <a target="_blank" href="${newsElement.web_url}">
                                         <div class="news">
