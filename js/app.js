@@ -283,7 +283,8 @@ $(".addStock").on('click', function(event) {
 
 // Better Style. Put () outside
 (function(){
-    displayChart([0]);
+    callMarkitOnDemandApi("AAPL", displayStockData);      
+    callMarkitOnDemandChartApi("AAPL", createChart);  
 })()
 
 
