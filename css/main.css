@@ -36,9 +36,13 @@ tr {
 .stockSearch {
 	background-color: #FFFFFF;
 	text-align: left;
-	margin-top: 5%;
+	/*margin-top: 5%;*/
 	margin-bottom: 5%;
 	height: 100%;
+	background-image: url('https://tinyurl.com/gwppycx');
+	background-repeat: none;
+	background-size: cover;
+	width: 100%;
 }
 
 
@@ -68,13 +72,18 @@ tr {
 	color: #F9F9F9;
 }
 
-.stockHeader, .newsHeader, .chartHeader {
+.stockHeader, .newsHeader, .chartHeader, .searchHeader {
 	background-color: #4992ff;
     color: white;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 10px;
     border-radius: 5px;
+}
+
+
+.searchHeader {
+	
 }
 
 .chartHeader {

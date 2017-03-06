@@ -10,18 +10,18 @@
 </head>
 <body>
 	<header></header>
+	<div class="stockSearch">
+		<div class="row">
+			<h2 class="searchHeader"> Enter Stock Symbol </h2>
+			<form class="submitSymbol">
+				<input type="text" autocomplete="off" name="search" id="search" placeholder="EX: AAPL"></input>
+				<button type="submit" class="addStock"><span>Add</span></button>
+			</form>
+		</div>
+	</div>
+	<hr>	
 	<main>
 		<div class="row">
-			<div class="col-12 stockSearch">
-				<h2> Enter Stock Symbol </h2>
-				<form class="submitSymbol">
-					<input type="text" autocomplete="off" name="search" id="search" placeholder="EX: AAPL"></input>
-					<button type="submit" class="addStock"><span>Add</span></button>
-				</form>
-			</div>
-
-			<hr>
-
 			<div class="col-12 stockChart">
 				<h2 class="chartHeader">Chart</h2>
 				<div id="chartDemoContainer"></div>
