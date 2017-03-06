@@ -38,6 +38,7 @@ tr {
 	text-align: left;
 	margin-top: 5%;
 	margin-bottom: 5%;
+	height: 100%;
 }
 
 
@@ -67,13 +68,17 @@ tr {
 	color: #F9F9F9;
 }
 
-.stockHeader, .newsHeader {
+.stockHeader, .newsHeader, .chartHeader {
 	background-color: #4992ff;
     color: white;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 10px;
     border-radius: 5px;
+}
+
+.chartHeader {
+	background-color: #0a6c9a;
 }
 
 .newsHeader {
