@@ -1,3 +1,27 @@
+.intro {
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 3em;
+	text-align: center;
+	margin-top: 10%;
+	color: #f3fff4;
+	background-color: rgba(96, 209, 243, 0.75);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.credit {
+	font-size: 8px;
+	font-style: italic;
+    position: absolute;
+    bottom: 8px;
+    right: 16px;	
+}
+
+.credit a {
+	font-size: 8px;
+}
 h2 { 
 	font-family: 'Josefin Sans', sans-serif;
 	margin-top: 5%;	
@@ -39,7 +63,7 @@ tr {
 	/*margin-top: 5%;*/
 	margin-bottom: 5%;
 	height: 100%;
-	background-image: url('https://tinyurl.com/gwppycx');
+	background-image: url('../img/background.jpg');
 	background-repeat: none;
 	background-size: cover;
 	width: 100%;
@@ -50,7 +74,7 @@ tr {
 	width: 90%;
 	height: 40px;
 	font-size: 25px;
-	background-color: #F1F1F1;
+	background-color: rgba(241, 241, 241, 0.80);
 	outline: none;
 	box-shadow: none;
 	border-radius: 5px;
@@ -83,7 +107,8 @@ tr {
 
 
 .searchHeader {
-	
+	background-color: rgba(86, 223, 236, 0.8);
+	margin-top: 15%;
 }
 
 .chartHeader {
