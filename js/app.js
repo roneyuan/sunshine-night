@@ -161,7 +161,9 @@ var callNewYorkTimesApi = function(searchTerm, callback) {
     var lastWeek = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
     var lastWeekMonth = String(lastWeek.getMonth() + 1);
     if (lastWeek.getMonth()+1 < 10) { lastWeekMonth = "0" + lastWeekMonth }
-    var beginDate = String(lastWeek.getFullYear()) + lastWeekMonth + String(lastWeek.getDate());
+    var lastWeekDay = String(lastWeek.getDate());    
+    if (lastWeek.getDate() < 10) { lastWeekDay = "0" + lastWeekDay } 
+    var beginDate = String(lastWeek.getFullYear()) + lastWeekMonth + lastWeekDay;
     var endDate = year + month + day;
 
     url += '?' + $.param({
