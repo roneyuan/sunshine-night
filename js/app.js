@@ -216,7 +216,7 @@ var displayStockNews = function(data, searchTerm) {
                                             <div class="col-8 newsTitle"><div class="newsButton">
                                             <div class="title">${title}</div>
                                             <p>
-                                            <div class="paragraph">${newsElement.lead_paragraph}</div>
+                                            <div class="paragraph">${newsElement.snippet}</div>
                                             </div></div>
                                         </div>
                                     </a>
@@ -229,7 +229,7 @@ var displayStockNews = function(data, searchTerm) {
                                             <div class="col-12 newsTitle"><div class="newsButtonNoImage">
                                             <div class="title">${title}</div>
                                             <p>
-                                            <div class="paragraph">${newsElement.lead_paragraph}</div>
+                                            <div class="paragraph">${newsElement.snippet}</div>
                                             </div></div>
                                         </div>
                                     </a>
