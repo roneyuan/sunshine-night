@@ -12,27 +12,66 @@ var callMarkitOnDemandApi = function(searchTerm, callback) {
     }); 
 }
 
+function callBarchartOnDemandApi(searchTerm, callback) {
+  let url = "https://marketdata.websol.barchart.com/getQuote.jsonp"; 
+  $.ajax({
+    data: { 
+      symbols: searchTerm,
+      key: "2fa1f157fb3ce032ffbb1d9fc16b687f"
+    },
+        url: url,
+        dataType: "jsonp",
+        success: callback,
+        error: handleError
+    });
+}
+
 var displayStockData = function(data) {
 
-    if (data.Status !== "SUCCESS") {
+    if (data.status.message !== "Success.") {
         alert("Unable to find the symbol. Try Use Symbol Finder!"); /* TODO Symbo Finder */
     } else {
+        /*
+        {
+  "status": {
+    "code": 200,
+    "message": "Success."
+  },
+  "results": [
+    {
+      "symbol": "AAPL",
+      "exchange": "BATS",
+      "name": "Apple Inc",
+      "dayCode": "A",
+      "serverTimestamp": "2017-08-11T15:41:48-05:00",
+      "mode": "i",
+      "lastPrice": 157.48,
+      "tradeTimestamp": "2017-08-11T15:59:59-05:00",
+      "netChange": 2.16,
+      "percentChange": 1.39,
+      "unitCode": "2",
+      "open": 154.94,
+      "high": 158.57,
+      "low": 154.94,
+      "close": 0,
+      "flag": "",
+      "volume": 1824000
+    }
+  ]
+}
+        */
+
+        let stock = data.results[0];
         var stockData = {
-            Change: data.Change,
-            ChangePercent: data.ChangePercent,
-            ChangePercentYTD: data.ChangePercentYTD,
-            ChangeYTD: data.ChangeYTD,
-            High: data.High,
-            LastPrice: data.LastPrice,
-            Low: data.Low,
-            MSDate: data.MSDate,
-            MarketCap: data.MarketCap,
-            Name: data.Name,
-            Open: data.Open,
-            Status: data.Status,
-            Symbol: data.Symbol,
-            Timestamp: data.Timestamp,
-            Volume: data.Volume
+            Change: stock.netChange,
+            ChangePercent: stock.percentChange,
+            High: stock.high,
+            LastPrice: stock.lastPrice,
+            Low: stock.low,
+            Name: stock.name,
+            Open: stock.open,
+            Symbol: stock.symbol,
+            Volume: stock.volume
         }   
 
         stockQuote.push(stockData);
@@ -44,7 +83,6 @@ var displayStockData = function(data) {
                                         <td>${element.High}</td>
                                         <td>${element.Low}</td>
                                         <td>${element.Volume}</td>
-                                        <td>${element.MarketCap}</td>
                                         <td>${element.LastPrice}</td>
                                         <td>${element.Name}</td></tr>`);
         });
@@ -285,7 +323,7 @@ $(".addStock").on('click', function(event) {
 
 // Better Style. Put () outside
 (function(){
-    callMarkitOnDemandApi("AAPL", displayStockData);      
+    callBarchartOnDemandApi("AAPL", displayStockData);      
     callMarkitOnDemandChartApi("AAPL", createChart);  
 })()
 
