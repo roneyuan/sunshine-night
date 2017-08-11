@@ -316,7 +316,7 @@ $(".addStock").on('click', function(event) {
         alert("You have added " + searchStock);
     } else {
         //searchHistory.push(unifiedSearchTerm); // When the API call and push. Not here. Or do it with promise, success and failure.
-        callMarkitOnDemandApi(searchStock, displayStockData);      
+        callBarchartOnDemandApi(searchStock, displayStockData);      
         callMarkitOnDemandChartApi(searchStock, createChart);    
     }
 });
