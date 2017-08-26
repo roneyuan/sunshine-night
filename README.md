@@ -3,7 +3,7 @@
 # Sunshine-Night
 
 Demo - 
-http://quick2pick.com/sunshine-night/index.html
+http://sungyuan.me/portfolio/sunshine-night/index.html
 
 ## Introudction - 
 
@@ -21,3 +21,4 @@ HTML/CSS, ES6, Vanilla JavaScript, jQuery, Responsive Design
 1. MarkitOnDemand
 2. HighChart
 3. New York Times
+4. Barchart API
