@@ -22,3 +22,4 @@ HTML/CSS, ES6, Vanilla JavaScript, jQuery, Responsive Design
 2. HighChart
 3. New York Times
 4. Barchart API
+5. Object Oriented Design
