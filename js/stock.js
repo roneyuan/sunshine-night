@@ -9,6 +9,7 @@ class Stock {
 	}
 }
 
+
 class StockContainer {
 	constructor() {
 		this.stockList = [];

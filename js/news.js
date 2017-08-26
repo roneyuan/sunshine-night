@@ -5,6 +5,7 @@ class News {
 	}
 }
 
+
 class NewsContainer {
 	constructor() {
 		this.newsList = [];

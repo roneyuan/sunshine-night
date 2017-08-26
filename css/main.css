@@ -1,252 +1,252 @@
 .intro {
-	font-family: 'Josefin Sans', sans-serif;
-	font-size: 3em;
-	text-align: center;
-	margin-top: 10%;
-	color: #f3fff4;
-	background-color: rgba(96, 209, 243, 0.75);
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 10px;
-  border-radius: 5px;
+	background-color:rgba(96,209,243,0.75);
+	border-radius:5px;
+	color:#f3fff4;
+	font-family:'Josefin Sans', sans-serif;
+	font-size:3em;
+	margin-top:10%;
+	padding-bottom:15px;
+	padding-left:10px;
+	padding-top:15px;
+	text-align:center;
 }
 
 .credit {
-	font-size: 8px;
-	font-style: italic;
-  position: absolute;
-  bottom: 8px;
-  right: 16px;	
+	bottom:8px;
+	font-size:8px;
+	font-style:italic;
+	position:absolute;
+	right:16px;
 }
 
 .credit a {
-	font-size: 8px;
-}
-h2 { 
-	font-family: 'Josefin Sans', sans-serif;
-	margin-top: 5%;	
+	font-size:8px;
 }
 
-h2, h3 {
-	text-align: left;
-	margin-top: 5%;
-}
-main, a {
-	font-size: 18px;
-	line-height: 120%;
-	font-family: 'Playfair Display', serif;
+h2 {
+	font-family:'Josefin Sans', sans-serif;
+	margin-top:5%;
 }
 
-ul { list-style-type: none; }
+h2,h3 {
+	margin-top:5%;
+	text-align:left;
+}
 
-li { display: inline-block; }
+main,a {
+	font-family:'Playfair Display', serif;
+	font-size:18px;
+	line-height:120%;
+}
 
-td { 
-	padding-left: 30px;
-	padding-right: 30px;
- }
+ul {
+	list-style-type:none;
+}
+
+li {
+	display:inline-block;
+}
+
+td {
+	padding-left:30px;
+	padding-right:30px;
+}
 
 tr {
 	height:50px;
-	padding-top: 2px;
-	padding-bottom: 2px;
+	padding-bottom:2px;
+	padding-top:2px;
 }
 
-.stockSearch, .stockChart {
-	padding-top: 10px;
-	padding-bottom: 10px;
+.stockSearch,.stockChart {
+	padding-bottom:10px;
+	padding-top:10px;
 }
 
 .stockSearch {
-	background-color: #FFFFFF;
-	text-align: left;
-	/*margin-top: 5%;*/
-	margin-bottom: 5%;
-	height: 100%;
-	background-image: url('../img/background.jpg');
-	background-repeat: none;
-	background-size: cover;
-	width: 100%;
+	background-color:#FFF;
+	background-image:url(../img/background.jpg);
+	background-repeat:none;
+	background-size:cover;
+	height:100%;
+	margin-bottom:5%;
+	text-align:left;
+	width:100%;
 }
 
-
 #search {
-	width: 90%;
-	height: 40px;
-	font-size: 25px;
-	background-color: rgba(241, 241, 241, 0.80);
-	outline: none;
-	box-shadow: none;
-	border-radius: 5px;
-	border: 0px;
-	font-family: 'Playfair Display', serif;
-	padding-left: 10px;
+	background-color:rgba(241,241,241,0.80);
+	border:0;
+	border-radius:5px;
+	box-shadow:none;
+	font-family:'Playfair Display', serif;
+	font-size:25px;
+	height:40px;
+	outline:none;
+	padding-left:10px;
+	width:90%;
 }
 
 .addStock {
-	width: 8%;
-	height: 40px;
-	font-size: 25px;
-	border-radius: 5px;
-	border: 0px;
-	font-family: 'Playfair Display', serif;
-	background-color: #4ea3f9;
-	cursor: pointer;
-	outline: none;
-	color: #F9F9F9;
+	background-color:#4ea3f9;
+	border:0;
+	border-radius:5px;
+	color:#F9F9F9;
+	cursor:pointer;
+	font-family:'Playfair Display', serif;
+	font-size:25px;
+	height:40px;
+	outline:none;
+	width:8%;
 }
 
-.stockHeader, .newsHeader, .chartHeader, .searchHeader {
-	background-color: #4992ff;
-  color: white;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 10px;
-  border-radius: 5px;
+.stockHeader,.newsHeader,.chartHeader,.searchHeader {
+	background-color:#4992ff;
+	border-radius:5px;
+	color:#FFF;
+	padding-bottom:15px;
+	padding-left:10px;
+	padding-top:15px;
 }
-
 
 .searchHeader {
-	background-color: rgba(86, 223, 236, 0.8);
-	margin-top: 15%;
+	background-color:rgba(86,223,236,0.8);
+	margin-top:15%;
 }
 
 .chartHeader {
-	background-color: #0a6c9a;
+	background-color:#0a6c9a;
 }
 
 .newsHeader {
-	background-color: #5f77ea
+	background-color:#5f77ea;
 }
 
 .stock {
-	overflow-x: auto; /* Responsive table */
-	background-color: #E2F3FF;
-	border-radius: 5px;
+	background-color:#E2F3FF;
+	border-radius:5px;
+	overflow-x:auto;
 }
 
-.stockList { padding: 15px 15px; }
+.stockList {
+	padding:15px;
+}
 
 .companyData {
-	transition-property: background-color;
-  transition-duration: 1s;
-  transition-timing-function: linear;	
+	transition-duration:1s;
+	transition-property:background-color;
+	transition-timing-function:linear;
 }
 
 .newsFrame {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: #bdd8f5;
-  transition-property: background-color;
-  transition-duration: 1s;
-  transition-timing-function: linear;		
-  background-clip: content-box;
-  border-radius: 15px;
+	background-clip:content-box;
+	background-color:#bdd8f5;
+	border-radius:15px;
+	padding-bottom:10px;
+	padding-top:10px;
+	transition-duration:1s;
+	transition-property:background-color;
+	transition-timing-function:linear;
 }
 
 .news {
+	background-color:#bdd8f5;
+	border:2px;
 	border-radius:5px;
-	width: 100%;
-	cursor:pointer;
-	border: 2px;
 	box-shadow:none;
-	text-align: left;	
-	background-color: #bdd8f5;
-	font-size: 18px;
-	line-height: 120%;
-	font-family: 'Playfair Display', serif;
+	cursor:pointer;
+	font-family:'Playfair Display', serif;
+	font-size:18px;
+	line-height:120%;
+	text-align:left;
+	width:100%;
 }
 
 .newsFrame:hover {
-	border-radius: 5px;
 	background-color:#d5edfb;
-	border-radius: 15px;
+	border-radius:15px;
 }
 
 .companyData td:hover {
 	background-color:#A9B6BF;
-	border-radius: 5px;
+	border-radius:5px;
 }
 
 .companyData:hover {
-	background-color: #CBDBE5;
+	background-color:#CBDBE5;
 }
 
-.newsButton, .newsButtonNoImage {
+.newsButton,.newsButtonNoImage {
+	border:2px;
 	border-radius:5px;
-	width: 100%;
-	cursor:pointer;
-	border: 2px;
 	box-shadow:none;
-	text-align: left;	
-	font-size: 18px;
-	line-height: 120%;
-	font-family: 'Playfair Display', serif;
+	cursor:pointer;
+	font-family:'Playfair Display', serif;
+	font-size:18px;
+	line-height:120%;
+	text-align:left;
+	width:100%;
 }
 
-.newsTitle, .newsImage {
-	padding-bottom: 20px;
-  padding-top: 20px;
+.newsTitle,.newsImage {
+	padding-bottom:20px;
+	padding-top:20px;
 }
 
 .newsTitle {
-	padding-left: 10px;
+	padding-left:10px;
 }
 
 .title {
-	font-weight: bold;
-	font-size: 24px;
-	line-height: 120%;
+	font-size:24px;
+	font-weight:700;
+	line-height:120%;
 }
 
 .paragraph {
-	font-size: 16px;
-	line-height: 120%;
+	font-size:16px;
+	line-height:120%;
 }
 
 a {
-	text-decoration: none; /* Take out the underline */
-	color: #3C3A3A;
+	color:#3C3A3A;
+	text-decoration:none;
 }
 
 .companyNewsName {
-	margin-top: 5%;
-	margin-bottom: 2%;
-	text-align: left;
-	font-family: 'Josefin Sans', sans-serif;
-	font-size: 25px;
+	font-family:'Josefin Sans', sans-serif;
+	font-size:25px;
+	margin-bottom:2%;
+	margin-top:5%;
+	text-align:left;
 }
 
-@media only screen and (max-width: 768px) { /* min width imply to mobile first */
-	h2, h3 {
-		margin-top: 10%;
-	}
-
+@media only screen and max-width 768px{
 	h3 {
-		padding-top: 10%;
+		padding-top:10%;
 	}
 
 	#search {
-		width: 70%;
+		width:70%;
 	}
 
 	.addStock span {
-		text-align: center;
+		text-align:center;
 	}
 
 	.addStock {
-		width: 28%;
+		width:28%;
 	}
 
 	.newsImage {
-		padding-bottom: 20px;
-	}
-
-	.companyNewsName {
-		margin-top: 10%;
+		padding-bottom:20px;
 	}
 
 	.noImage {
-		padding-top: 50px;
+		padding-top:50px;
+	}
+
+	h2,h3,.companyNewsName {
+		margin-top:10%;
 	}
 }
