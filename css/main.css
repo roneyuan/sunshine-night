@@ -5,18 +5,18 @@
 	margin-top: 10%;
 	color: #f3fff4;
 	background-color: rgba(96, 209, 243, 0.75);
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 10px;
-    border-radius: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  border-radius: 5px;
 }
 
 .credit {
 	font-size: 8px;
 	font-style: italic;
-    position: absolute;
-    bottom: 8px;
-    right: 16px;	
+  position: absolute;
+  bottom: 8px;
+  right: 16px;	
 }
 
 .credit a {
@@ -98,11 +98,11 @@ tr {
 
 .stockHeader, .newsHeader, .chartHeader, .searchHeader {
 	background-color: #4992ff;
-    color: white;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 10px;
-    border-radius: 5px;
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  border-radius: 5px;
 }
 
 
@@ -129,19 +129,19 @@ tr {
 
 .companyData {
 	transition-property: background-color;
-    transition-duration: 1s;
-    transition-timing-function: linear;	
+  transition-duration: 1s;
+  transition-timing-function: linear;	
 }
 
 .newsFrame {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #bdd8f5;
-    transition-property: background-color;
-    transition-duration: 1s;
-    transition-timing-function: linear;		
-    background-clip: content-box;
-    border-radius: 15px;
+  transition-property: background-color;
+  transition-duration: 1s;
+  transition-timing-function: linear;		
+  background-clip: content-box;
+  border-radius: 15px;
 }
 
 .news {
@@ -186,7 +186,7 @@ tr {
 
 .newsTitle, .newsImage {
 	padding-bottom: 20px;
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .newsTitle {
