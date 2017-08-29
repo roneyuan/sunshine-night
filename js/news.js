@@ -16,4 +16,4 @@ class NewsContainer {
   }
 }
 
-let newsContainer = new NewsContainer();
+let newsContainer = new NewsContainer(); 

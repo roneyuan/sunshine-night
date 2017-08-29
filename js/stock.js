@@ -13,7 +13,7 @@ class Stock {
 class StockContainer {
   constructor() {
     this.stockList = [];
-    this.stockChart = []; // to be delete or future implementation
+    this.stockChart = [];
   }
 
   addStock(stock) {
