@@ -72,22 +72,18 @@ function callMarkitOnDemandChartApi(searchTerm, callback) {
 
 function createChart(data) {
   let dataArray = [];
-  let tempArray = [];
 
   for (let i = 0; i < data.Elements[0].DataSeries.close.values.length; i++) {
-    tempArray = [];
-    tempArray.push(Date.parse(data.Dates[i]));
-    tempArray.push(data.Elements[0].DataSeries.open.values[i]);
-    dataArray.push(tempArray);
+    dataArray.push([Date.parse(data.Dates[i]), data.Elements[0].DataSeries.open.values[i]]);
   }
 
-  let tempChart = {
+  let chart = {
     name: data.Elements[0].Symbol,
     data: dataArray,
     color: "#"+(Math.floor(Math.random()*16777215).toString(16)) //random color, sometimes might be transparent
   };
 
-  stockContainer.stockChart.push(tempChart);
+  stockContainer.stockChart.push(chart);
   displayChart(stockContainer.stockChart);
 }
 

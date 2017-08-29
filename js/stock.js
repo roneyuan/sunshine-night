@@ -1,36 +1,36 @@
 class Stock {
-	constructor(symbol, high, low, volume, lastPrice, companyName) {
-		this.symbol = symbol;
-		this.high = high;
-		this.low = low;
-		this.volume = volume;
-		this.lastPrice = lastPrice;
-		this.companyName = companyName;
-	}
+  constructor(symbol, high, low, volume, lastPrice, companyName) {
+    this.symbol = symbol;
+    this.high = high;
+    this.low = low;
+    this.volume = volume;
+    this.lastPrice = lastPrice;
+    this.companyName = companyName;
+  }
 }
 
 
 class StockContainer {
-	constructor() {
-		this.stockList = [];
-		this.stockChart = [];
-	}
+  constructor() {
+    this.stockList = [];
+    this.stockChart = []; // to be delete or future implementation
+  }
 
-	addStock(stock) {
-		this.stockList.push(stock);
-	}
+  addStock(stock) {
+    this.stockList.push(stock);
+  }
 
-	checkIfExist(symbol) {
-		let result = false;
-		
-		this.stockList.forEach(stock => {
-			if (stock.symbol === symbol) {
-				result = true;
-			} 
-		});
+  checkIfExist(symbol) {
+    let result = false;
+    
+    this.stockList.forEach(stock => {
+      if (stock.symbol === symbol) {
+        result = true;
+      } 
+    });
 
-		return result;
-	}
+    return result;
+  }
 }
 
 let stockContainer = new StockContainer();

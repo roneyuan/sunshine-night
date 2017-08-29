@@ -1,73 +1,73 @@
 <!DOCTYPE>
 <html>
 <head>
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/grid.css" />
-	<link rel="stylesheet" href="css/main.css" />
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/grid.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
 </head>
 <body>
-	<header></header>
-	<div class="stockSearch">
-		<div class="row">
-			<div class="intro">Track multiple stocks' history data, quote, and news in one spot. Just that easy! 
-			</div>
-			<h2 class="searchHeader"> Enter Stock Symbol </h2>
-			<form class="submitSymbol">
-				<input type="text" autocomplete="off" name="search" id="search" placeholder="EX: MSFT"></input>
-				<button type="submit" class="addStock"><span>Add</span></button>
-			</form>
-		</div>
-		<div class="credit">
-			Photo by <a href="https://www.flickr.com/photos/eblake/">eblake</a>
-		</div>
-	</div>
-	<hr>	
-	<main>
-		<div class="row">
-			<div class="col-12 stockChart">
-				<h2 class="chartHeader">Chart</h2>
-				<div id="chartDemoContainer"></div>
-			</div>
+  <header></header>
+  <div class="stockSearch">
+    <div class="row">
+      <div class="intro">Track multiple stocks' history data, quote, and news in one spot. Just that easy! 
+      </div>
+      <h2 class="searchHeader"> Enter Stock Symbol </h2>
+      <form class="submitSymbol">
+        <input type="text" autocomplete="off" name="search" id="search" placeholder="EX: MSFT"></input>
+        <button type="submit" class="addStock"><span>Add</span></button>
+      </form>
+    </div>
+    <div class="credit">
+      Photo by <a href="https://www.flickr.com/photos/eblake/">eblake</a>
+    </div>
+  </div>
+  <hr>  
+  <main>
+    <div class="row">
+      <div class="col-12 stockChart">
+        <h2 class="chartHeader">Chart</h2>
+        <div id="chartDemoContainer"></div>
+      </div>
 
-		</div>
+    </div>
 
-		
-		<div class="row">
-			<h2 class="stockHeader">Stock Information</h2>
-			<div class="col-12">
-				<div class="stock">
-					<table class="stockList">
-						<tr>
-							<td> Symbol </td>
-							<td> High </td>
-							<td> Low </td>	
-							<td> Volume </td>
-							<td> LastPrice </td>
-							<td> Company </td>
-						</tr>
-					</table>
-				</div>					
-			</div>					
-		</div>
-		
-		<div class="row">	
-			<h2 class="newsHeader">Stock News</h2>
-			<div id="newsRow" class="col-12"> </div>			
-		</div>
-	</main>
+    
+    <div class="row">
+      <h2 class="stockHeader">Stock Information</h2>
+      <div class="col-12">
+        <div class="stock">
+          <table class="stockList">
+            <tr>
+              <td> Symbol </td>
+              <td> High </td>
+              <td> Low </td>  
+              <td> Volume </td>
+              <td> LastPrice </td>
+              <td> Company </td>
+            </tr>
+          </table>
+        </div>          
+      </div>          
+    </div>
+    
+    <div class="row"> 
+      <h2 class="newsHeader">Stock News</h2>
+      <div id="newsRow" class="col-12"> </div>      
+    </div>
+  </main>
 
-	<footer></footer>
-	<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>	
-	<script type="text/javascript" src="https://code.highcharts.com/stock/highstock.js"></script>
-	<script tyoe="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-	<script type="text/javascript" src="js/stock.js"></script>
-	<script type="text/javascript" src="js/news.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
+  <footer></footer>
+  <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> 
+  <script type="text/javascript" src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script tyoe="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+  <script type="text/javascript" src="js/stock.js"></script>
+  <script type="text/javascript" src="js/news.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 </body>
 
 </html>
